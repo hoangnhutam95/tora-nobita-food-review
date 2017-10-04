@@ -1,0 +1,25 @@
+<nav>
+	<div class="nav-wrapper">
+		<a href="/" class="brand-logo"><%= fa_icon "coffee" %> | ベトナムの料理</a>
+		<ul id="nav-mobile" class="right hide-on-med-and-down">
+			<% if logged_in? %>
+                <li><a href="#about-path" onclick="internal_link_click(this)">About</a></li>
+                <li><a href="#portfolio-path" onclick="internal_link_click(this)">Food</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown" data-toggle="dropdown"><%= current_user.name %>
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu pull-right">
+						<li><%= link_to "Log out", logout_path, method: "delete" %></li>
+					</ul>
+				</li>
+			<% else %>
+				<% if current_page?(root_path) %>
+					<li><a href="#about-path" onclick="internal_link_click(this)">About</a></li>
+					<li><a href="#portfolio-path" onclick="internal_link_click(this)">Portfolio</a></li>
+					<li><a href="/login">Sign In</a></li>
+				<% end %>
+			<% end %>
+		</ul>
+	</div>
+</nav>
