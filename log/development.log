@@ -6,3 +6,214 @@ Processing by Rails::WelcomeController#index as HTML
 Completed 200 OK in 33ms (Views: 8.7ms | ActiveRecord: 0.0ms)
 
 
+  [1m[35m (274.3ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (268.7ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT GET_LOCK('4922289610855857030', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateUsers (20171004120620)
+  [1m[35m (210.5ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `email` varchar(255), `false` varchar(255), `name` varchar(255), `avatar` varchar(255) DEFAULT 'avatar_default.jpg', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004120620')[0m
+  [1m[35m (24.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddIndexToUsersEmail (20171004120841)
+  [1m[35m (240.3ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) [0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004120841')[0m
+  [1m[35m (64.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPasswordDigestToUsers (20171004121021)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('4922289610855857030')[0m
+  [1m[35m (228.9ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (232.6ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT GET_LOCK('4922289610855857030', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateUsers (20171004120620)
+  [1m[35m (220.3ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) NOT NULL, `name` varchar(255) NOT NULL, `avatar` varchar(255) DEFAULT 'avatar_default.jpg', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004120620')[0m
+  [1m[35m (36.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddIndexToUsersEmail (20171004120841)
+  [1m[35m (147.6ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) [0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004120841')[0m
+  [1m[35m (56.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPasswordDigestToUsers (20171004121021)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('4922289610855857030')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT GET_LOCK('4922289610855857030', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to AddIndexToUsersEmail (20171004120841)
+  [1m[35m (120.0ms)[0m  [1m[35mDROP INDEX `index_users_on_email` ON `users`[0m
+  [1m[35mSQL (24.0ms)[0m  [1m[31mDELETE FROM `schema_migrations` WHERE `schema_migrations`.`version` = '20171004120841'[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT RELEASE_LOCK('4922289610855857030')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `users`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'users'[0m
+  [1m[35m (238.6ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (249.2ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT GET_LOCK('4922289610855857030', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateUsers (20171004120620)
+  [1m[35m (311.8ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) NOT NULL, `name` varchar(255) NOT NULL, `avatar` varchar(255) DEFAULT 'avatar_default.jpg', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004120620')[0m
+  [1m[35m (27.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddIndexToUsersEmail (20171004120841)
+  [1m[35m (166.6ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) [0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004120841')[0m
+  [1m[35m (63.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPasswordDigestToUsers (20171004121021)
+  [1m[35m (546.4ms)[0m  [1m[35mALTER TABLE `users` ADD `password_digest` varchar(255) NOT NULL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004121021')[0m
+  [1m[35m (31.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRememberDigestToUsers (20171004121125)
+  [1m[35m (461.3ms)[0m  [1m[35mALTER TABLE `users` ADD `remember_digest` varchar(255)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004121125')[0m
+  [1m[35m (31.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateReviews (20171004121504)
+  [1m[35m (255.7ms)[0m  [1m[35mCREATE TABLE `reviews` (`id` int AUTO_INCREMENT PRIMARY KEY, `user_id` int NOT NULL, `point` int DEFAULT 0, `content` varchar(255), `false` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_reviews_on_user_id`  (`user_id`), CONSTRAINT `fk_rails_74a66bd6c5`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004121504')[0m
+  [1m[35m (29.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateStores (20171004122312)
+  [1m[35m (248.0ms)[0m  [1m[35mCREATE TABLE `stores` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `address` varchar(255), `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_stores_on_user_id`  (`user_id`), CONSTRAINT `fk_rails_b526db2ffb`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004122312')[0m
+  [1m[35m (29.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFoods (20171004122754)
+  [1m[35m (271.9ms)[0m  [1m[35mCREATE TABLE `foods` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `price` int, `description` varchar(255), `user_id` int NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_foods_on_user_id`  (`user_id`), CONSTRAINT `fk_rails_541e2e5c7b`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004122754')[0m
+  [1m[35m (29.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddFkFoodIdToReviews (20171004122957)
+  [1m[35m (409.5ms)[0m  [1m[35mALTER TABLE `reviews` ADD `food_id` int NOT NULL[0m
+  [1m[35m (158.6ms)[0m  [1m[35mCREATE  INDEX `index_reviews_on_food_id`  ON `reviews` (`food_id`) [0m
+  [1m[35m (689.4ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_25ab61da8d`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004122957')[0m
+  [1m[35m (35.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFoodPictures (20171004123132)
+  [1m[35m (224.9ms)[0m  [1m[35mCREATE TABLE `food_pictures` (`id` int AUTO_INCREMENT PRIMARY KEY, `food_id` int NOT NULL, `picture` varchar(255) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_food_pictures_on_food_id`  (`food_id`), CONSTRAINT `fk_rails_4236a1d8da`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004123132')[0m
+  [1m[35m (31.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2017-10-04 12:42:53', '2017-10-04 12:42:53')[0m
+  [1m[35m (31.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT RELEASE_LOCK('4922289610855857030')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `food_pictures`[0m
+  [1m[35m (0.7ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'food_pictures'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `foods`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'foods'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `reviews`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'reviews'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `stores`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'stores'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `users`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'users'[0m
+  [1m[35m (232.3ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (234.9ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT GET_LOCK('4922289610855857030', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateUsers (20171004120620)
+  [1m[35m (265.2ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) NOT NULL, `name` varchar(255) NOT NULL, `avatar` varchar(255) DEFAULT 'avatar_default.jpg', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004120620')[0m
+  [1m[35m (32.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddIndexToUsersEmail (20171004120841)
+  [1m[35m (172.9ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) [0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004120841')[0m
+  [1m[35m (55.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPasswordDigestToUsers (20171004121021)
+  [1m[35m (454.0ms)[0m  [1m[35mALTER TABLE `users` ADD `password_digest` varchar(255) NOT NULL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004121021')[0m
+  [1m[35m (31.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRememberDigestToUsers (20171004121125)
+  [1m[35m (460.4ms)[0m  [1m[35mALTER TABLE `users` ADD `remember_digest` varchar(255)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004121125')[0m
+  [1m[35m (22.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateReviews (20171004121504)
+  [1m[35m (273.1ms)[0m  [1m[35mCREATE TABLE `reviews` (`id` int AUTO_INCREMENT PRIMARY KEY, `user_id` int NOT NULL, `point` int DEFAULT 0, `content` varchar(255), `false` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_reviews_on_user_id`  (`user_id`), CONSTRAINT `fk_rails_74a66bd6c5`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004121504')[0m
+  [1m[35m (30.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateStores (20171004122312)
+  [1m[35m (272.4ms)[0m  [1m[35mCREATE TABLE `stores` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `address` varchar(255), `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_stores_on_user_id`  (`user_id`), CONSTRAINT `fk_rails_b526db2ffb`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004122312')[0m
+  [1m[35m (48.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFoods (20171004122754)
+  [1m[35m (278.3ms)[0m  [1m[35mCREATE TABLE `foods` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `price` int, `description` varchar(255), `user_id` int NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_foods_on_user_id`  (`user_id`), CONSTRAINT `fk_rails_541e2e5c7b`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004122754')[0m
+  [1m[35m (29.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddFkFoodIdToReviews (20171004122957)
+  [1m[35m (417.9ms)[0m  [1m[35mALTER TABLE `reviews` ADD `food_id` int NOT NULL[0m
+  [1m[35m (201.0ms)[0m  [1m[35mCREATE  INDEX `index_reviews_on_food_id`  ON `reviews` (`food_id`) [0m
+  [1m[35m (655.1ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_25ab61da8d`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004122957')[0m
+  [1m[35m (27.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFoodPictures (20171004123132)
+  [1m[35m (324.0ms)[0m  [1m[35mCREATE TABLE `food_pictures` (`id` int AUTO_INCREMENT PRIMARY KEY, `food_id` int NOT NULL, `picture` varchar(255) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_food_pictures_on_food_id`  (`food_id`), CONSTRAINT `fk_rails_4236a1d8da`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004123132')[0m
+  [1m[35m (48.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2017-10-04 12:43:48', '2017-10-04 12:43:48')[0m
+  [1m[35m (39.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT RELEASE_LOCK('4922289610855857030')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `food_pictures`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'food_pictures'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `foods`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'foods'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `reviews`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'reviews'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `stores`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'stores'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `users`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'users'[0m
