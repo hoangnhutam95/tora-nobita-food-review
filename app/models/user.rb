@@ -53,6 +53,12 @@ class User < ApplicationRecord
         UserMailer.account_activation(self).deliver_now
     end
 
+    def resend_activation_email
+        self.send(:create_activation_digest)
+        self.send_activation_email
+        self.save
+    end
+
     # Sets the password reset attributes.
     def create_reset_digest
         self.reset_token = User.new_token
