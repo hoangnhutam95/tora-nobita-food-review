@@ -1,0 +1,32 @@
+<% provide(:title, @user.name) %>
+<div class="container user-profile">
+	<br><br>
+	<div class="row">
+		<div class="col-xs-4">
+			<div class="avatar">
+				<% if @user.avatar? %>
+					<%= image_tag @user.avatar.url(:thumb) %>
+				<% else %>
+					<% if @user.gender == "Male" %>
+						<%= image_tag @user.avatar.default_url("ava-default-male.jpg") %>
+					<% else %>
+						<%= image_tag @user.avatar.default_url("ava-default-female.png") %>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+		<div class="col-xs-8">
+			<div class="name-express">
+				<div class="name"><%= @user.name %></div>
+				<div class="config-area">
+					<% if current_user?(@user) %>
+						<%= link_to "Edit Profile", edit_user_path(current_user), id: "edit-profile-btn" %>
+					<% else %>
+						<%= render 'follow_form' if logged_in? %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

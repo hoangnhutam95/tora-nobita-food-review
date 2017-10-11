@@ -5,6 +5,14 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
 $shadowColor: #bbbbbb;
 
+#avatar-header{
+    height: 40px;
+    border-radius: 50%;
+}
+
+.form-control{
+    font-size: 14px !important;
+}
 .content{
     width: 100%;
     margin-top: 2px;
