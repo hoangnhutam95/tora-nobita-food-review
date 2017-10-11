@@ -5276,3 +5276,1536 @@ Processing by StaticPagesController#home as HTML
 Completed 200 OK in 47ms (Views: 45.3ms | ActiveRecord: 0.4ms)
 
 
+  [1m[35m (473.0ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (407.2ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT GET_LOCK('4922289610855857030', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.8ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateUsers (20171004120620)
+  [1m[35m (347.9ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) NOT NULL, `name` varchar(255) NOT NULL, `avatar` varchar(255) DEFAULT 'avatar_default.jpg', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (22.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004120620')[0m
+  [1m[35m (48.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddIndexToUsersEmail (20171004120841)
+  [1m[35m (331.5ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) [0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004120841')[0m
+  [1m[35m (85.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPasswordDigestToUsers (20171004121021)
+  [1m[35m (626.0ms)[0m  [1m[35mALTER TABLE `users` ADD `password_digest` varchar(255) NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004121021')[0m
+  [1m[35m (67.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRememberDigestToUsers (20171004121125)
+  [1m[35m (644.0ms)[0m  [1m[35mALTER TABLE `users` ADD `remember_digest` varchar(255)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004121125')[0m
+  [1m[35m (42.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateReviews (20171004121504)
+  [1m[35m (366.5ms)[0m  [1m[35mCREATE TABLE `reviews` (`id` int AUTO_INCREMENT PRIMARY KEY, `user_id` int NOT NULL, `point` int DEFAULT 0, `content` varchar(255), `false` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_reviews_on_user_id`  (`user_id`), CONSTRAINT `fk_rails_74a66bd6c5`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004121504')[0m
+  [1m[35m (79.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateStores (20171004122312)
+  [1m[35m (663.4ms)[0m  [1m[35mCREATE TABLE `stores` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `address` varchar(255), `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_stores_on_user_id`  (`user_id`), CONSTRAINT `fk_rails_b526db2ffb`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004122312')[0m
+  [1m[35m (75.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFoods (20171004122754)
+  [1m[35m (420.2ms)[0m  [1m[35mCREATE TABLE `foods` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `price` int, `description` varchar(255), `store_id` int NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_foods_on_store_id`  (`store_id`), CONSTRAINT `fk_rails_a68752f748`
+FOREIGN KEY (`store_id`)
+  REFERENCES `stores` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004122754')[0m
+  [1m[35m (52.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddFkFoodIdToReviews (20171004122957)
+  [1m[35m (1778.7ms)[0m  [1m[35mALTER TABLE `reviews` ADD `food_id` int NOT NULL[0m
+  [1m[35m (222.5ms)[0m  [1m[35mCREATE  INDEX `index_reviews_on_food_id`  ON `reviews` (`food_id`) [0m
+  [1m[35m (937.6ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_25ab61da8d`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004122957')[0m
+  [1m[35m (42.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFoodPictures (20171004123132)
+  [1m[35m (399.0ms)[0m  [1m[35mCREATE TABLE `food_pictures` (`id` int AUTO_INCREMENT PRIMARY KEY, `food_id` int NOT NULL, `picture` varchar(255) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_food_pictures_on_food_id`  (`food_id`), CONSTRAINT `fk_rails_4236a1d8da`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171004123132')[0m
+  [1m[35m (41.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2017-10-11 10:14:45', '2017-10-11 10:14:45')[0m
+  [1m[35m (38.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT RELEASE_LOCK('4922289610855857030')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW CREATE TABLE `food_pictures`[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'food_pictures'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `foods`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'foods'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `reviews`[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'reviews'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `stores`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'stores'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `users`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'users'[0m
+Started GET "/" for 127.0.0.1 at 2017-10-11 17:15:42 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (4.8ms)
+  Rendered layouts/_rails_default.html.erb (12344.0ms)
+  Rendered layouts/_shim.html.erb (0.5ms)
+  Rendered layouts/_header.html.erb (1.2ms)
+Completed 200 OK in 12374ms (Views: 12359.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2017-10-11 17:17:42 +0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (17.7ms)
+  Rendered layouts/_rails_default.html.erb (42.9ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 74ms (Views: 71.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2017-10-11 17:17:47 +0700
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (2.7ms)
+  Rendered layouts/_rails_default.html.erb (38.0ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 71ms (Views: 47.1ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2017-10-11 17:17:48 +0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (2.6ms)
+  Rendered layouts/_rails_default.html.erb (48.3ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 62ms (Views: 60.9ms | ActiveRecord: 0.0ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT GET_LOCK('4922289610855857030', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to AddActivationToUsers (20171011103349)
+  [1m[35m (633.0ms)[0m  [1m[35mALTER TABLE `users` ADD `activation_digest` varchar(255)[0m
+  [1m[35m (560.1ms)[0m  [1m[35mALTER TABLE `users` ADD `activated` tinyint(1) DEFAULT 0[0m
+  [1m[35m (625.6ms)[0m  [1m[35mALTER TABLE `users` ADD `activated_at` datetime[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20171011103349')[0m
+  [1m[35m (42.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('4922289610855857030')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `food_pictures`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'food_pictures'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `foods`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'foods'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `reviews`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'reviews'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `stores`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'stores'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `users`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'users'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('4922289610855857030', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('4922289610855857030')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `food_pictures`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'food_pictures'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `foods`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'foods'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `reviews`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'reviews'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `stores`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'stores'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `users`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'users'[0m
+Started GET "/login" for 127.0.0.1 at 2017-10-11 17:56:27 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (16.0ms)
+  Rendered layouts/_rails_default.html.erb (5168.5ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (4.3ms)
+Completed 200 OK in 5208ms (Views: 5196.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2017-10-11 17:56:46 +0700
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"6ZT+ms8gtIIMzjLy7WFg89R3jsSWjCzh6vtg/aSePt1ONz90p1IWhO5GfihGO9VcvAbwVCEoABjPqFuqjiOezA==", "session"=>{"email"=>"ducnd2495@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Let's Go !"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.7ms)
+  Rendered layouts/_rails_default.html.erb (55.4ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 117ms (Views: 63.3ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2017-10-11 17:56:52 +0700
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (5.6ms)
+  Rendered layouts/_rails_default.html.erb (59.3ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.6ms)
+Completed 200 OK in 89ms (Views: 72.6ms | ActiveRecord: 3.2ms)
+
+
+Started POST "/signup" for 127.0.0.1 at 2017-10-11 17:57:10 +0700
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"JLvTB48rhh+kQpu7iTZJmeR06uAp1aotst+DBG+PidbSZBNk/60hfLmRCuyzQM/fLcnB15q7Wo2Rqxr9FlKd9Q==", "user"=>{"name"=>"Nguyen Dinh Duc", "email"=>"ducnd2495@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up !"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `name`, `created_at`, `updated_at`, `password_digest`, `activation_digest`) VALUES ('ducnd2495@gmail.com', 'Nguyen Dinh Duc', '2017-10-11 10:57:10', '2017-10-11 10:57:10', '$2a$10$k.QonbdGiOyZveyBGpg.KOOc2b9ng7KoFwUH6uW63YQloBZmarKBy', '$2a$10$2J2WVqtzEeMYpMgkDga.NupPcqlcOcZHDlMVRx1CX/pgn.C.zE5Ku')[0m
+  [1m[35m (46.6ms)[0m  [1m[35mCOMMIT[0m
+  Rendering user_mailer/account_activation.html.erb within layouts/mailer
+  Rendered user_mailer/account_activation.html.erb within layouts/mailer (1.7ms)
+  Rendering user_mailer/account_activation.text.erb within layouts/mailer
+  Rendered user_mailer/account_activation.text.erb within layouts/mailer (0.6ms)
+UserMailer#account_activation: processed outbound mail in 361.8ms
+Sent mail to ducnd2495@gmail.com (4268.1ms)
+Date: Wed, 11 Oct 2017 17:57:11 +0700
+From: noreply@example.com
+To: ducnd2495@gmail.com
+Message-ID: <59ddf90710bd0_7e4627d189068879@master.mail>
+Subject: Account activation
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_59ddf907e8c3_7e4627d1890687da";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+
+----==_mimepart_59ddf907e8c3_7e4627d1890687da
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi Nguyen Dinh Duc,
+
+Welcome to the Sample App! Click on the link below to activate your account:
+
+http://localhost:3000/account_activations/rOARgpB-8EiGzbVf7wL93A/edit?email=ducnd2495%40gmail.com
+
+
+----==_mimepart_59ddf907e8c3_7e4627d1890687da
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <h1>Food...</h1>
+
+<p>Hi Nguyen Dinh Duc,</p>
+
+<p>
+Welcome to the Food! Click on the link below to activate your account:
+</p>
+
+<a href="http://localhost:3000/account_activations/rOARgpB-8EiGzbVf7wL93A/edit?email=ducnd2495%40gmail.com">Activate</a>
+
+  </body>
+</html>
+
+----==_mimepart_59ddf907e8c3_7e4627d1890687da--
+
+Redirected to http://localhost:3000/
+Completed 302 Found in 5180ms (ActiveRecord: 47.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 17:57:15 +0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1.9ms)
+  Rendered layouts/_rails_default.html.erb (65.5ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 78ms (Views: 75.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/account_activations/rOARgpB-8EiGzbVf7wL93A/edit?email=ducnd2495%40gmail.com" for 127.0.0.1 at 2017-10-11 17:58:35 +0700
+  
+AbstractController::ActionNotFound (The action 'edit' could not be found for AccountActivationsController):
+  
+actionpack (5.0.6) lib/abstract_controller/base.rb:121:in `process'
+actionview (5.0.6) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.0.6) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.6) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.6) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.6) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.6) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.6) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.6) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.6) lib/action_dispatch/routing/route_set.rb:727:in `call'
+rack (2.0.3) lib/rack/etag.rb:25:in `call'
+rack (2.0.3) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.3) lib/rack/head.rb:12:in `call'
+rack (2.0.3) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.3) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.0.6) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.6) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.6) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.6) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.6) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /var/lib/gems/2.3.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/unknown_action.html.erb within rescues/layout
+  Rendered /var/lib/gems/2.3.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/unknown_action.html.erb within rescues/layout (0.7ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (1337.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS `Food_review_development`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE DATABASE `Food_review_development` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE DATABASE `Food_review_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (737.5ms)[0m  [1m[35mCREATE TABLE `food_pictures` (`id` int AUTO_INCREMENT PRIMARY KEY, `food_id` int NOT NULL, `picture` varchar(255) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_food_pictures_on_food_id` USING btree (`food_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (376.2ms)[0m  [1m[35mCREATE TABLE `foods` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `price` int, `description` varchar(255), `store_id` int NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_foods_on_store_id` USING btree (`store_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (441.9ms)[0m  [1m[35mCREATE TABLE `reviews` (`id` int AUTO_INCREMENT PRIMARY KEY, `user_id` int NOT NULL, `point` int DEFAULT 0, `content` varchar(255), `false` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `food_id` int NOT NULL,  INDEX `index_reviews_on_food_id` USING btree (`food_id`),  INDEX `index_reviews_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (344.2ms)[0m  [1m[35mCREATE TABLE `stores` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `address` varchar(255), `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_stores_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (687.0ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) NOT NULL, `name` varchar(255) NOT NULL, `avatar` varchar(255) DEFAULT 'avatar_default.jpg', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `password_digest` varchar(255) NOT NULL, `remember_digest` varchar(255), `activation_digest` varchar(255), `activated` tinyint(1) DEFAULT 0, `activated_at` datetime, UNIQUE INDEX `index_users_on_email` USING btree (`email`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (1046.3ms)[0m  [1m[35mALTER TABLE `food_pictures` ADD CONSTRAINT `fk_rails_4236a1d8da`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (1226.7ms)[0m  [1m[35mALTER TABLE `foods` ADD CONSTRAINT `fk_rails_a68752f748`
+FOREIGN KEY (`store_id`)
+  REFERENCES `stores` (`id`)
+[0m
+  [1m[35m (1184.9ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_25ab61da8d`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (980.5ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_74a66bd6c5`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (1125.1ms)[0m  [1m[35mALTER TABLE `stores` ADD CONSTRAINT `fk_rails_b526db2ffb`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (329.9ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT version FROM `schema_migrations`[0m
+  [1m[35m (109.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20171011103349)[0m
+  [1m[35m (43.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20171004122312),
+(20171004120841),
+(20171004121021),
+(20171004123132),
+(20171004122754),
+(20171004121125),
+(20171004122957),
+(20171004120620),
+(20171004121504);
+
+[0m
+  [1m[35m (412.6ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2017-10-11 11:27:36', '2017-10-11 11:27:36')[0m
+  [1m[35m (40.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (400.5ms)[0m  [1m[35mCREATE TABLE `food_pictures` (`id` int AUTO_INCREMENT PRIMARY KEY, `food_id` int NOT NULL, `picture` varchar(255) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_food_pictures_on_food_id` USING btree (`food_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (387.7ms)[0m  [1m[35mCREATE TABLE `foods` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `price` int, `description` varchar(255), `store_id` int NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_foods_on_store_id` USING btree (`store_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (409.2ms)[0m  [1m[35mCREATE TABLE `reviews` (`id` int AUTO_INCREMENT PRIMARY KEY, `user_id` int NOT NULL, `point` int DEFAULT 0, `content` varchar(255), `false` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `food_id` int NOT NULL,  INDEX `index_reviews_on_food_id` USING btree (`food_id`),  INDEX `index_reviews_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (367.3ms)[0m  [1m[35mCREATE TABLE `stores` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `address` varchar(255), `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_stores_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (376.1ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) NOT NULL, `name` varchar(255) NOT NULL, `avatar` varchar(255) DEFAULT 'avatar_default.jpg', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `password_digest` varchar(255) NOT NULL, `remember_digest` varchar(255), `activation_digest` varchar(255), `activated` tinyint(1) DEFAULT 0, `activated_at` datetime, UNIQUE INDEX `index_users_on_email` USING btree (`email`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (880.3ms)[0m  [1m[35mALTER TABLE `food_pictures` ADD CONSTRAINT `fk_rails_4236a1d8da`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (904.0ms)[0m  [1m[35mALTER TABLE `foods` ADD CONSTRAINT `fk_rails_a68752f748`
+FOREIGN KEY (`store_id`)
+  REFERENCES `stores` (`id`)
+[0m
+  [1m[35m (847.4ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_25ab61da8d`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (949.6ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_74a66bd6c5`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (768.7ms)[0m  [1m[35mALTER TABLE `stores` ADD CONSTRAINT `fk_rails_b526db2ffb`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (376.3ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT version FROM `schema_migrations`[0m
+  [1m[35m (42.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20171011103349)[0m
+  [1m[35m (44.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20171004122312),
+(20171004120841),
+(20171004121021),
+(20171004123132),
+(20171004122754),
+(20171004121125),
+(20171004122957),
+(20171004120620),
+(20171004121504);
+
+[0m
+  [1m[35m (343.3ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2017-10-11 11:27:43', '2017-10-11 11:27:43')[0m
+  [1m[35m (40.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('4922289610855857030', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT RELEASE_LOCK('4922289610855857030')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `food_pictures`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'food_pictures'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `foods`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'foods'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `reviews`[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'reviews'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `stores`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'stores'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `users`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'users'[0m
+Started GET "/login" for 127.0.0.1 at 2017-10-11 18:28:17 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (16.0ms)
+  Rendered layouts/_rails_default.html.erb (363.8ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (6.2ms)
+Completed 200 OK in 407ms (Views: 394.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2017-10-11 18:28:24 +0700
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"u/2H2C1QaNN/q2SQDu3bRWlgn4Skr1y7F4rw/8ske18H/JynTt8aEZTDaAagqD6xl6Yn0HAyASMSR4utlSzDxQ==", "session"=>{"email"=>"ducnd2495@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Let's Go !"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (23.6ms)
+  Rendered layouts/_rails_default.html.erb (64.9ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+Completed 200 OK in 114ms (Views: 94.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2017-10-11 18:28:29 +0700
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (3.9ms)
+  Rendered layouts/_rails_default.html.erb (83.5ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.2ms)
+Completed 200 OK in 116ms (Views: 95.5ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/signup" for 127.0.0.1 at 2017-10-11 18:28:40 +0700
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"fY86pytxFBMvjOFdMpcAmXAtCb1Vxzwal97To4SgHsWLUPrEW/ezcDJfcAoI4YbfuZAiiuapzLq0qkpa/X0K5g==", "user"=>{"name"=>"Nguyen Dinh Duc", "email"=>"ducnd2495@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up !"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `name`, `created_at`, `updated_at`, `password_digest`, `activation_digest`) VALUES ('ducnd2495@gmail.com', 'Nguyen Dinh Duc', '2017-10-11 11:28:40', '2017-10-11 11:28:40', '$2a$10$.wG3SW38xnjkFFEvzqRG.eso8gYtj6hVBb4BhfNNAdPZKQW8t91Eu', '$2a$10$WDPpwnFxCuCRJn2AVc7k6OUbktb.lhbiHIZH.Wz../PdOc9crWrK.')[0m
+  [1m[35m (29.6ms)[0m  [1m[35mCOMMIT[0m
+  Rendering user_mailer/account_activation.html.erb within layouts/mailer
+  Rendered user_mailer/account_activation.html.erb within layouts/mailer (1.9ms)
+  Rendering user_mailer/account_activation.text.erb within layouts/mailer
+  Rendered user_mailer/account_activation.text.erb within layouts/mailer (0.8ms)
+UserMailer#account_activation: processed outbound mail in 145.8ms
+Sent mail to ducnd2495@gmail.com (4138.1ms)
+Date: Wed, 11 Oct 2017 18:28:40 +0700
+From: noreply@example.com
+To: ducnd2495@gmail.com
+Message-ID: <59de0068cbc0d_7dd25c78386299d@master.mail>
+Subject: Account activation
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_59de0068ca385_7dd25c783862815";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+
+----==_mimepart_59de0068ca385_7dd25c783862815
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi Nguyen Dinh Duc,
+
+Welcome to the Sample App! Click on the link below to activate your account:
+
+http://localhost:3000/account_activations/pJwpQwIOOb-atm-lT76Kaw/edit?email=ducnd2495%40gmail.com
+
+
+----==_mimepart_59de0068ca385_7dd25c783862815
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <h1>Food...</h1>
+
+<p>Hi Nguyen Dinh Duc,</p>
+
+<p>
+Welcome to the Food! Click on the link below to activate your account:
+</p>
+
+<a href="http://localhost:3000/account_activations/pJwpQwIOOb-atm-lT76Kaw/edit?email=ducnd2495%40gmail.com">Activate</a>
+
+  </body>
+</html>
+
+----==_mimepart_59de0068ca385_7dd25c783862815--
+
+Redirected to http://localhost:3000/
+Completed 302 Found in 4667ms (ActiveRecord: 30.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 18:28:44 +0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1.4ms)
+  Rendered layouts/_rails_default.html.erb (55.8ms)
+  Rendered layouts/_shim.html.erb (0.5ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+Completed 200 OK in 66ms (Views: 64.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/account_activations/rOARgpB-8EiGzbVf7wL93A/edit?email=ducnd2495%40gmail.com" for 127.0.0.1 at 2017-10-11 18:29:43 +0700
+Processing by AccountActivationsController#edit as HTML
+  Parameters: {"email"=>"ducnd2495@gmail.com", "id"=>"rOARgpB-8EiGzbVf7wL93A"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 101ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 18:29:43 +0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1.3ms)
+  Rendered layouts/_rails_default.html.erb (63.2ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 72ms (Views: 70.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2017-10-11 18:30:48 +0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.9ms)
+  Rendered layouts/_rails_default.html.erb (58.1ms)
+  Rendered layouts/_shim.html.erb (1.1ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+Completed 200 OK in 69ms (Views: 68.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2017-10-11 18:30:54 +0700
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TJWYiQ0NRFWnHJRNIw08lpJ0fcMd8N/HFLKqwBGaFLXwlIP2boI2l0x0mNuNSNlibLLFl8ltgl8Rf9GST5KsLw==", "session"=>{"email"=>"ducnd2495@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Let's Go !"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 91ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 18:30:54 +0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_rails_default.html.erb (47.9ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 56ms (Views: 54.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2017-10-11 18:31:30 +0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (7.9ms)
+  Rendered layouts/_rails_default.html.erb (48.8ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 67ms (Views: 65.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2017-10-11 18:31:32 +0700
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (2.5ms)
+  Rendered layouts/_rails_default.html.erb (51.7ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 65ms (Views: 63.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signup" for 127.0.0.1 at 2017-10-11 18:31:43 +0700
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"b7lW9STuirJkDdcWpBm9nGdBwYW/hMkyDYyQaxE3q0aZZpaWVGgt0XneRkGebzvarvzqsgzqOZIu+AmSaOq/ZQ==", "user"=>{"name"=>"Nguyen Dinh Duc", "email"=>"ducnd2495@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up !"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (1.9ms)
+  Rendered layouts/_rails_default.html.erb (44.0ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 796ms (Views: 51.0ms | ActiveRecord: 1.0ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (1594.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS `Food_review_development`[0m
+  [1m[35m (1366.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS `Food_review_test`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE DATABASE `Food_review_development` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE DATABASE `Food_review_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (369.6ms)[0m  [1m[35mCREATE TABLE `food_pictures` (`id` int AUTO_INCREMENT PRIMARY KEY, `food_id` int NOT NULL, `picture` varchar(255) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_food_pictures_on_food_id` USING btree (`food_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (422.5ms)[0m  [1m[35mCREATE TABLE `foods` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `price` int, `description` varchar(255), `store_id` int NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_foods_on_store_id` USING btree (`store_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (431.3ms)[0m  [1m[35mCREATE TABLE `reviews` (`id` int AUTO_INCREMENT PRIMARY KEY, `user_id` int NOT NULL, `point` int DEFAULT 0, `content` varchar(255), `false` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `food_id` int NOT NULL,  INDEX `index_reviews_on_food_id` USING btree (`food_id`),  INDEX `index_reviews_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (477.2ms)[0m  [1m[35mCREATE TABLE `stores` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `address` varchar(255), `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_stores_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (524.2ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) NOT NULL, `name` varchar(255) NOT NULL, `avatar` varchar(255) DEFAULT 'avatar_default.jpg', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `password_digest` varchar(255) NOT NULL, `remember_digest` varchar(255), `activation_digest` varchar(255), `activated` tinyint(1) DEFAULT 0, `activated_at` datetime, UNIQUE INDEX `index_users_on_email` USING btree (`email`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (860.7ms)[0m  [1m[35mALTER TABLE `food_pictures` ADD CONSTRAINT `fk_rails_4236a1d8da`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (961.2ms)[0m  [1m[35mALTER TABLE `foods` ADD CONSTRAINT `fk_rails_a68752f748`
+FOREIGN KEY (`store_id`)
+  REFERENCES `stores` (`id`)
+[0m
+  [1m[35m (970.5ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_25ab61da8d`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (1007.0ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_74a66bd6c5`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (2538.2ms)[0m  [1m[35mALTER TABLE `stores` ADD CONSTRAINT `fk_rails_b526db2ffb`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (311.7ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT version FROM `schema_migrations`[0m
+  [1m[35m (42.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20171011103349)[0m
+  [1m[35m (43.9ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20171004122312),
+(20171004120841),
+(20171004121021),
+(20171004123132),
+(20171004122754),
+(20171004121125),
+(20171004122957),
+(20171004120620),
+(20171004121504);
+
+[0m
+  [1m[35m (455.4ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2017-10-11 11:32:08', '2017-10-11 11:32:08')[0m
+  [1m[35m (62.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (380.2ms)[0m  [1m[35mCREATE TABLE `food_pictures` (`id` int AUTO_INCREMENT PRIMARY KEY, `food_id` int NOT NULL, `picture` varchar(255) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_food_pictures_on_food_id` USING btree (`food_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (376.3ms)[0m  [1m[35mCREATE TABLE `foods` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `price` int, `description` varchar(255), `store_id` int NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_foods_on_store_id` USING btree (`store_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (621.2ms)[0m  [1m[35mCREATE TABLE `reviews` (`id` int AUTO_INCREMENT PRIMARY KEY, `user_id` int NOT NULL, `point` int DEFAULT 0, `content` varchar(255), `false` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `food_id` int NOT NULL,  INDEX `index_reviews_on_food_id` USING btree (`food_id`),  INDEX `index_reviews_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (366.3ms)[0m  [1m[35mCREATE TABLE `stores` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `address` varchar(255), `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_stores_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (523.0ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) NOT NULL, `name` varchar(255) NOT NULL, `avatar` varchar(255) DEFAULT 'avatar_default.jpg', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `password_digest` varchar(255) NOT NULL, `remember_digest` varchar(255), `activation_digest` varchar(255), `activated` tinyint(1) DEFAULT 0, `activated_at` datetime, UNIQUE INDEX `index_users_on_email` USING btree (`email`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (1027.0ms)[0m  [1m[35mALTER TABLE `food_pictures` ADD CONSTRAINT `fk_rails_4236a1d8da`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (984.2ms)[0m  [1m[35mALTER TABLE `foods` ADD CONSTRAINT `fk_rails_a68752f748`
+FOREIGN KEY (`store_id`)
+  REFERENCES `stores` (`id`)
+[0m
+  [1m[35m (893.7ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_25ab61da8d`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (1037.6ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_74a66bd6c5`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (871.3ms)[0m  [1m[35mALTER TABLE `stores` ADD CONSTRAINT `fk_rails_b526db2ffb`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (343.5ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT version FROM `schema_migrations`[0m
+  [1m[35m (42.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20171011103349)[0m
+  [1m[35m (55.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20171004122312),
+(20171004120841),
+(20171004121021),
+(20171004123132),
+(20171004122754),
+(20171004121125),
+(20171004122957),
+(20171004120620),
+(20171004121504);
+
+[0m
+  [1m[35m (443.4ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2017-10-11 11:32:16', '2017-10-11 11:32:16')[0m
+  [1m[35m (49.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('4922289610855857030', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('4922289610855857030')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `food_pictures`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'food_pictures'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `foods`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'foods'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSHOW CREATE TABLE `reviews`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'reviews'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `stores`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'stores'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `users`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'users'[0m
+Started GET "/signup" for 127.0.0.1 at 2017-10-11 18:32:34 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (13.7ms)
+  Rendered layouts/_rails_default.html.erb (359.2ms)
+  Rendered layouts/_shim.html.erb (0.7ms)
+  Rendered layouts/_header.html.erb (4.7ms)
+Completed 200 OK in 415ms (Views: 386.6ms | ActiveRecord: 1.4ms)
+
+
+Started POST "/signup" for 127.0.0.1 at 2017-10-11 18:32:45 +0700
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FZf6+MHl9xW65XqgAufAiffB0saTFC+IDoMasrXjHOuyNDsWqZdVE1htNnqpvXUmn7CsViSwA3Er0CHln168+g==", "user"=>{"name"=>"Nguyen Dinh Duc", "email"=>"ducnd2495@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up !"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `users` (`email`, `name`, `created_at`, `updated_at`, `password_digest`, `activation_digest`) VALUES ('ducnd2495@gmail.com', 'Nguyen Dinh Duc', '2017-10-11 11:32:45', '2017-10-11 11:32:45', '$2a$10$uWzTtWx3BZn5fZ0kupH29OrR9ZYsmb4v4PPWzspMq3Q8aL2ZQibAe', '$2a$10$D08nwIWgV1TJY9Dch.H87OrysQJU6cQ.hu9LI3xucOtXmxm2vogLq')[0m
+  [1m[35m (44.6ms)[0m  [1m[35mCOMMIT[0m
+  Rendering user_mailer/account_activation.html.erb within layouts/mailer
+  Rendered user_mailer/account_activation.html.erb within layouts/mailer (1.7ms)
+  Rendering user_mailer/account_activation.text.erb within layouts/mailer
+  Rendered user_mailer/account_activation.text.erb within layouts/mailer (0.6ms)
+UserMailer#account_activation: processed outbound mail in 218.7ms
+Sent mail to ducnd2495@gmail.com (4072.9ms)
+Date: Wed, 11 Oct 2017 18:32:45 +0700
+From: noreply@example.com
+To: ducnd2495@gmail.com
+Message-ID: <59de015de1fe5_9b919bec9491768@master.mail>
+Subject: Account activation
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_59de015de09a5_9b919bec94916e4";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+
+----==_mimepart_59de015de09a5_9b919bec94916e4
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi Nguyen Dinh Duc,
+
+Welcome to the Sample App! Click on the link below to activate your account:
+
+http://localhost:3000/account_activations/8tBLf49jvnXWEB5E6EO3Mg/edit?email=ducnd2495%40gmail.com
+
+
+----==_mimepart_59de015de09a5_9b919bec94916e4
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <h1>Food...</h1>
+
+<p>Hi Nguyen Dinh Duc,</p>
+
+<p>
+Welcome to the Food! Click on the link below to activate your account:
+</p>
+
+<a href="http://localhost:3000/account_activations/8tBLf49jvnXWEB5E6EO3Mg/edit?email=ducnd2495%40gmail.com">Activate</a>
+
+  </body>
+</html>
+
+----==_mimepart_59de015de09a5_9b919bec94916e4--
+
+Redirected to http://localhost:3000/
+Completed 302 Found in 4685ms (ActiveRecord: 45.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 18:32:50 +0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1.6ms)
+  Rendered layouts/_rails_default.html.erb (63.3ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+Completed 200 OK in 75ms (Views: 72.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/account_activations/rOARgpB-8EiGzbVf7wL93A/edit?email=ducnd2495%40gmail.com" for 127.0.0.1 at 2017-10-11 18:33:42 +0700
+Processing by AccountActivationsController#edit as HTML
+  Parameters: {"email"=>"ducnd2495@gmail.com", "id"=>"rOARgpB-8EiGzbVf7wL93A"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 90ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 18:33:42 +0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_rails_default.html.erb (42.6ms)
+  Rendered layouts/_shim.html.erb (0.5ms)
+  Rendered layouts/_header.html.erb (1.1ms)
+Completed 200 OK in 50ms (Views: 49.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/account_activations/rOARgpB-8EiGzbVf7wL93A/edit?email=ducnd2495%40gmail.com" for 127.0.0.1 at 2017-10-11 18:33:58 +0700
+Processing by AccountActivationsController#edit as HTML
+  Parameters: {"email"=>"ducnd2495@gmail.com", "id"=>"rOARgpB-8EiGzbVf7wL93A"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 90ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 18:33:58 +0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.9ms)
+  Rendered layouts/_rails_default.html.erb (54.2ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+Completed 200 OK in 62ms (Views: 60.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2017-10-11 18:36:58 +0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (9.2ms)
+  Rendered layouts/_rails_default.html.erb (52.9ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 73ms (Views: 70.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2017-10-11 18:37:04 +0700
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gZs7ZeS2WioJAWzk0M0rnNFbNI4y2dxu68sExufeFBg9miAahzko6OJpYHJ+iM5oL52M2uZEgfbuBn+Uudasgg==", "session"=>{"email"=>"ducnd2495@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Let's Go !"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.5ms)
+  Rendered layouts/_rails_default.html.erb (57.8ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 154ms (Views: 64.7ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2017-10-11 18:37:09 +0700
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LnogHAyKXEtqBh0yjbXCSgb0d+xVGqUgwQMGadBD9qOJ2eHyZPj+TYiOUegm73flboUJfOK+idnkUD0++v5Wsg==", "session"=>{"email"=>"ducnd2495@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Let's Go !"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 105ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 18:37:09 +0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1.2ms)
+  Rendered layouts/_rails_default.html.erb (48.1ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.6ms)
+Completed 200 OK in 56ms (Views: 54.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2017-10-11 18:37:40 +0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.7ms)
+  Rendered layouts/_rails_default.html.erb (54.6ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+Completed 200 OK in 63ms (Views: 61.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2017-10-11 18:37:46 +0700
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Iof/45Kt4lPEeYMVHhkAoIQVHRY+2EoeDkbK/LhhHJmehuSc8SKQkS8Rj4OwXOVUetOlQupFF4YLi7Gu5mmkAw==", "session"=>{"email"=>"ducnd2495@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Let's Go !"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 115ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 18:37:46 +0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_rails_default.html.erb (44.2ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.6ms)
+Completed 200 OK in 51ms (Views: 50.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2017-10-11 18:53:24 +0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (2.2ms)
+  Rendered layouts/_rails_default.html.erb (54.2ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+Completed 200 OK in 65ms (Views: 63.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2017-10-11 18:53:26 +0700
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (3.4ms)
+  Rendered layouts/_rails_default.html.erb (47.4ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.6ms)
+Completed 200 OK in 61ms (Views: 58.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signup" for 127.0.0.1 at 2017-10-11 18:53:44 +0700
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"a8UJDVo8PAS3VElhXlRCON52hRunJj1njbogedYCjy6dGsluKrqbZ6qH2DZkIsR+F8uuLBRIzceuzrmAr9+bDQ==", "user"=>{"name"=>"Nguyen Dinh Duc", "email"=>"20131012@student.hust.edu.vn", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up !"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = '20131012@student.hust.edu.vn' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `name`, `created_at`, `updated_at`, `password_digest`, `activation_digest`) VALUES ('20131012@student.hust.edu.vn', 'Nguyen Dinh Duc', '2017-10-11 11:53:44', '2017-10-11 11:53:44', '$2a$10$0FvJNRwekMSmrRqBl8Zfn.FxcUDfr.d/CoCTzqaSTRhETRzsZM1gm', '$2a$10$Ti/TajxaQyVl3.eytLXFm.78NjGyEQqWXWhJdao/HIR9uqe6959O.')[0m
+  [1m[35m (94.9ms)[0m  [1m[35mCOMMIT[0m
+  Rendering user_mailer/account_activation.html.erb within layouts/mailer
+  Rendered user_mailer/account_activation.html.erb within layouts/mailer (2.2ms)
+  Rendering user_mailer/account_activation.text.erb within layouts/mailer
+  Rendered user_mailer/account_activation.text.erb within layouts/mailer (0.7ms)
+UserMailer#account_activation: processed outbound mail in 17.8ms
+Sent mail to 20131012@student.hust.edu.vn (4166.9ms)
+Date: Wed, 11 Oct 2017 18:53:44 +0700
+From: noreply@example.com
+To: 20131012@student.hust.edu.vn
+Message-ID: <59de0648b7e15_9b919bedac919e4@master.mail>
+Subject: Account activation
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_59de0648b6e0e_9b919bedac918fe";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+
+----==_mimepart_59de0648b6e0e_9b919bedac918fe
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi Nguyen Dinh Duc,
+
+Welcome to the Sample App! Click on the link below to activate your account:
+
+http://localhost:3000/account_activations/FL4Lhzd41BcSGy5BeZl9pg/edit?email=20131012%40student.hust.edu.vn
+
+
+----==_mimepart_59de0648b6e0e_9b919bedac918fe
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <h1>Food...</h1>
+
+<p>Hi Nguyen Dinh Duc,</p>
+
+<p>
+Welcome to the Food! Click on the link below to activate your account:
+</p>
+
+<a href="http://localhost:3000/account_activations/FL4Lhzd41BcSGy5BeZl9pg/edit?email=20131012%40student.hust.edu.vn">Activate</a>
+
+  </body>
+</html>
+
+----==_mimepart_59de0648b6e0e_9b919bedac918fe--
+
+Redirected to http://localhost:3000/
+Completed 302 Found in 4468ms (ActiveRecord: 95.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 18:53:48 +0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1.3ms)
+  Rendered layouts/_rails_default.html.erb (53.5ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 63ms (Views: 61.3ms | ActiveRecord: 0.0ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (1343.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS `Food_review_development`[0m
+  [1m[35m (1600.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS `Food_review_test`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE DATABASE `Food_review_development` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE DATABASE `Food_review_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (353.0ms)[0m  [1m[35mCREATE TABLE `food_pictures` (`id` int AUTO_INCREMENT PRIMARY KEY, `food_id` int NOT NULL, `picture` varchar(255) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_food_pictures_on_food_id` USING btree (`food_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (465.9ms)[0m  [1m[35mCREATE TABLE `foods` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `price` int, `description` varchar(255), `store_id` int NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_foods_on_store_id` USING btree (`store_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (465.4ms)[0m  [1m[35mCREATE TABLE `reviews` (`id` int AUTO_INCREMENT PRIMARY KEY, `user_id` int NOT NULL, `point` int DEFAULT 0, `content` varchar(255), `false` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `food_id` int NOT NULL,  INDEX `index_reviews_on_food_id` USING btree (`food_id`),  INDEX `index_reviews_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (443.6ms)[0m  [1m[35mCREATE TABLE `stores` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `address` varchar(255), `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_stores_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (309.5ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) NOT NULL, `name` varchar(255) NOT NULL, `avatar` varchar(255) DEFAULT 'avatar_default.jpg', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `password_digest` varchar(255) NOT NULL, `remember_digest` varchar(255), `activation_digest` varchar(255), `activated` tinyint(1) DEFAULT 0, `activated_at` datetime, UNIQUE INDEX `index_users_on_email` USING btree (`email`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (1151.4ms)[0m  [1m[35mALTER TABLE `food_pictures` ADD CONSTRAINT `fk_rails_4236a1d8da`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (802.9ms)[0m  [1m[35mALTER TABLE `foods` ADD CONSTRAINT `fk_rails_a68752f748`
+FOREIGN KEY (`store_id`)
+  REFERENCES `stores` (`id`)
+[0m
+  [1m[35m (1148.0ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_25ab61da8d`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (979.8ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_74a66bd6c5`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (994.2ms)[0m  [1m[35mALTER TABLE `stores` ADD CONSTRAINT `fk_rails_b526db2ffb`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (410.7ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT version FROM `schema_migrations`[0m
+  [1m[35m (53.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20171011103349)[0m
+  [1m[35m (43.9ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20171004122312),
+(20171004120841),
+(20171004121021),
+(20171004123132),
+(20171004122754),
+(20171004121125),
+(20171004122957),
+(20171004120620),
+(20171004121504);
+
+[0m
+  [1m[35m (377.2ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2017-10-11 11:58:07', '2017-10-11 11:58:07')[0m
+  [1m[35m (58.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (338.4ms)[0m  [1m[35mCREATE TABLE `food_pictures` (`id` int AUTO_INCREMENT PRIMARY KEY, `food_id` int NOT NULL, `picture` varchar(255) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_food_pictures_on_food_id` USING btree (`food_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (424.3ms)[0m  [1m[35mCREATE TABLE `foods` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `price` int, `description` varchar(255), `store_id` int NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_foods_on_store_id` USING btree (`store_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (454.0ms)[0m  [1m[35mCREATE TABLE `reviews` (`id` int AUTO_INCREMENT PRIMARY KEY, `user_id` int NOT NULL, `point` int DEFAULT 0, `content` varchar(255), `false` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `food_id` int NOT NULL,  INDEX `index_reviews_on_food_id` USING btree (`food_id`),  INDEX `index_reviews_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (331.8ms)[0m  [1m[35mCREATE TABLE `stores` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `address` varchar(255), `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_stores_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (365.0ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) NOT NULL, `name` varchar(255) NOT NULL, `avatar` varchar(255) DEFAULT 'avatar_default.jpg', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `password_digest` varchar(255) NOT NULL, `remember_digest` varchar(255), `activation_digest` varchar(255), `activated` tinyint(1) DEFAULT 0, `activated_at` datetime, UNIQUE INDEX `index_users_on_email` USING btree (`email`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (803.5ms)[0m  [1m[35mALTER TABLE `food_pictures` ADD CONSTRAINT `fk_rails_4236a1d8da`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (837.0ms)[0m  [1m[35mALTER TABLE `foods` ADD CONSTRAINT `fk_rails_a68752f748`
+FOREIGN KEY (`store_id`)
+  REFERENCES `stores` (`id`)
+[0m
+  [1m[35m (848.9ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_25ab61da8d`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (1004.9ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_74a66bd6c5`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (737.6ms)[0m  [1m[35mALTER TABLE `stores` ADD CONSTRAINT `fk_rails_b526db2ffb`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (304.8ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT version FROM `schema_migrations`[0m
+  [1m[35m (48.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20171011103349)[0m
+  [1m[35m (44.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20171004122312),
+(20171004120841),
+(20171004121021),
+(20171004123132),
+(20171004122754),
+(20171004121125),
+(20171004122957),
+(20171004120620),
+(20171004121504);
+
+[0m
+  [1m[35m (299.5ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2017-10-11 11:58:14', '2017-10-11 11:58:14')[0m
+  [1m[35m (39.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Started GET "/account_activations/FL4Lhzd41BcSGy5BeZl9pg/edit?email=20131012%40student.hust.edu.vn" for 127.0.0.1 at 2017-10-11 18:59:40 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by AccountActivationsController#edit as HTML
+  Parameters: {"email"=>"20131012@student.hust.edu.vn", "id"=>"FL4Lhzd41BcSGy5BeZl9pg"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = '20131012@student.hust.edu.vn' LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 27ms (ActiveRecord: 1.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 18:59:40 +0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (2.3ms)
+  Rendered layouts/_rails_default.html.erb (382.8ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+Completed 200 OK in 399ms (Views: 394.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2017-10-11 19:00:25 +0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (16.2ms)
+  Rendered layouts/_rails_default.html.erb (53.0ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 78ms (Views: 76.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2017-10-11 19:00:26 +0700
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (3.7ms)
+  Rendered layouts/_rails_default.html.erb (104.6ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (1.4ms)
+Completed 200 OK in 136ms (Views: 117.5ms | ActiveRecord: 1.8ms)
+
+
+Started POST "/signup" for 127.0.0.1 at 2017-10-11 19:00:37 +0700
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"yyVtfFOtaDyTouLX3cOy90N00neSQ9kzSa4b1owVr7k9+q0fIyvPX45xc4DntTSxisn5QCEtKZNq2oIv9ci7mg==", "user"=>{"name"=>"Nguyen Dinh Duc", "email"=>"ducnd2495@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up !"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (2.2ms)
+  Rendered layouts/_rails_default.html.erb (52.0ms)
+  Rendered layouts/_shim.html.erb (0.7ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+Completed 200 OK in 625ms (Views: 61.4ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/signup" for 127.0.0.1 at 2017-10-11 19:00:47 +0700
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Sfcp8VpYic65x9j+uNS16BJ57RQA2CNMnJMRTJbEE3/uVOgfMioryFtPlCQTjgBHegiThLd8D7W5wCobvHmzbg==", "user"=>{"name"=>"Nguyen Dinh Duc", "email"=>"ducnd2495@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up !"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `name`, `created_at`, `updated_at`, `password_digest`, `activation_digest`) VALUES ('ducnd2495@gmail.com', 'Nguyen Dinh Duc', '2017-10-11 12:00:47', '2017-10-11 12:00:47', '$2a$10$xa9G2.ZJGnYUeAAm1D7ZoeDuraZfjq03c3RVFuwC7r7xfCma9ZNxC', '$2a$10$Hp/HOGnAPEiOPEeXwWYM8eTbbooF9e3Sp9AxxJgK3zcdXsDcRthX.')[0m
+  [1m[35m (61.1ms)[0m  [1m[35mCOMMIT[0m
+  Rendering user_mailer/account_activation.html.erb within layouts/mailer
+  Rendered user_mailer/account_activation.html.erb within layouts/mailer (1.7ms)
+  Rendering user_mailer/account_activation.text.erb within layouts/mailer
+  Rendered user_mailer/account_activation.text.erb within layouts/mailer (0.5ms)
+UserMailer#account_activation: processed outbound mail in 179.3ms
+Sent mail to ducnd2495@gmail.com (3697.1ms)
+Date: Wed, 11 Oct 2017 19:00:48 +0700
+From: noreply@example.com
+To: ducnd2495@gmail.com
+Message-ID: <59de07f044f_11dd21437a81296a@master.mail>
+Subject: Account activation
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_59de07eff2eaf_11dd21437a812896";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+
+----==_mimepart_59de07eff2eaf_11dd21437a812896
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi Nguyen Dinh Duc,
+
+Welcome to the Sample App! Click on the link below to activate your account:
+
+http://localhost:3000/account_activations/X6tMOdxe5AZZJhpVlRVO_g/edit?email=ducnd2495%40gmail.com
+
+
+----==_mimepart_59de07eff2eaf_11dd21437a812896
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <h1>Food...</h1>
+
+<p>Hi Nguyen Dinh Duc,</p>
+
+<p>
+Welcome to the Food! Click on the link below to activate your account:
+</p>
+
+<a href="http://localhost:3000/account_activations/X6tMOdxe5AZZJhpVlRVO_g/edit?email=ducnd2495%40gmail.com">Activate</a>
+
+  </body>
+</html>
+
+----==_mimepart_59de07eff2eaf_11dd21437a812896--
+
+Redirected to http://localhost:3000/
+Completed 302 Found in 4280ms (ActiveRecord: 62.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 19:00:51 +0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1.7ms)
+  Rendered layouts/_rails_default.html.erb (57.3ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+Completed 200 OK in 66ms (Views: 65.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/account_activations/X6tMOdxe5AZZJhpVlRVO_g/edit?email=ducnd2495%40gmail.com" for 127.0.0.1 at 2017-10-11 19:00:58 +0700
+Processing by AccountActivationsController#edit as HTML
+  Parameters: {"email"=>"ducnd2495@gmail.com", "id"=>"X6tMOdxe5AZZJhpVlRVO_g"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+Completed 500 Internal Server Error in 91ms (ActiveRecord: 0.4ms)
+
+
+  
+NameError (uninitialized constant User::FILL_IN):
+  
+app/models/user.rb:47:in `activate'
+app/controllers/account_activations_controller.rb:5:in `edit'
+  Rendering /var/lib/gems/2.3.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /var/lib/gems/2.3.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /var/lib/gems/2.3.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (3.6ms)
+  Rendering /var/lib/gems/2.3.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /var/lib/gems/2.3.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.8ms)
+  Rendering /var/lib/gems/2.3.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /var/lib/gems/2.3.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /var/lib/gems/2.3.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (44.1ms)
+Started GET "/account_activations/X6tMOdxe5AZZJhpVlRVO_g/edit?email=ducnd2495%40gmail.com" for 127.0.0.1 at 2017-10-11 19:03:19 +0700
+Processing by AccountActivationsController#edit as HTML
+  Parameters: {"email"=>"ducnd2495@gmail.com", "id"=>"X6tMOdxe5AZZJhpVlRVO_g"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (26.2ms)[0m  [1m[33mUPDATE `users` SET `activated` = 1, `updated_at` = '2017-10-11 12:03:19' WHERE `users`.`id` = 1[0m
+  [1m[35m (94.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `users` SET `activated_at` = '2017-10-11 12:03:19' WHERE `users`.`id` = 1[0m
+  [1m[35m (39.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/users/1
+Completed 302 Found in 285ms (ActiveRecord: 161.5ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2017-10-11 19:03:19 +0700
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 19:03:19 +0700
+Processing by StaticPagesController#home as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1.1ms)
+  Rendered layouts/_rails_default.html.erb (46.0ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+Completed 200 OK in 55ms (Views: 52.7ms | ActiveRecord: 0.4ms)
+
+
+Started DELETE "/logout" for 127.0.0.1 at 2017-10-11 19:03:24 +0700
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"tQQw2uIpstd8x4sz8b2TNCVxYs3vtpFgD7ESKKB+McUSp/E0ilsQ0Z5Px+la5yabTQAcXVgSvZkq4il/isOR1A=="}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 4ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 19:03:24 +0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1.3ms)
+  Rendered layouts/_rails_default.html.erb (51.4ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+Completed 200 OK in 61ms (Views: 58.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2017-10-11 19:03:25 +0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (2.2ms)
+  Rendered layouts/_rails_default.html.erb (60.4ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+Completed 200 OK in 71ms (Views: 69.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2017-10-11 19:03:30 +0700
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"pYC08IfsRQaXBj9Ev2haf4osziXDUiNaDbelKeg5lzsZga+P5GM3xHxuM9IRLb+LdOp2cRfPfsIIet57tjEvoQ==", "session"=>{"email"=>"ducnd2495@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Let's Go !"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'ducnd2495@gmail.com' LIMIT 1[0m
+Redirected to http://localhost:3000/users/1
+Completed 302 Found in 108ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2017-10-11 19:03:30 +0700
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 2ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-11 19:03:30 +0700
+Processing by StaticPagesController#home as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_rails_default.html.erb (45.0ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+Completed 200 OK in 52ms (Views: 50.6ms | ActiveRecord: 0.3ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (1338.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS `Food_review_development`[0m
+  [1m[35m (1308.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS `Food_review_test`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE DATABASE `Food_review_development` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE DATABASE `Food_review_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (342.2ms)[0m  [1m[35mCREATE TABLE `food_pictures` (`id` int AUTO_INCREMENT PRIMARY KEY, `food_id` int NOT NULL, `picture` varchar(255) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_food_pictures_on_food_id` USING btree (`food_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (575.2ms)[0m  [1m[35mCREATE TABLE `foods` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `price` int, `description` varchar(255), `store_id` int NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_foods_on_store_id` USING btree (`store_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (401.0ms)[0m  [1m[35mCREATE TABLE `reviews` (`id` int AUTO_INCREMENT PRIMARY KEY, `user_id` int NOT NULL, `point` int DEFAULT 0, `content` varchar(255), `false` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `food_id` int NOT NULL,  INDEX `index_reviews_on_food_id` USING btree (`food_id`),  INDEX `index_reviews_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (387.5ms)[0m  [1m[35mCREATE TABLE `stores` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `address` varchar(255), `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_stores_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (343.2ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) NOT NULL, `name` varchar(255) NOT NULL, `avatar` varchar(255) DEFAULT 'avatar_default.jpg', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `password_digest` varchar(255) NOT NULL, `remember_digest` varchar(255), `activation_digest` varchar(255), `activated` tinyint(1) DEFAULT 0, `activated_at` datetime, UNIQUE INDEX `index_users_on_email` USING btree (`email`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (927.3ms)[0m  [1m[35mALTER TABLE `food_pictures` ADD CONSTRAINT `fk_rails_4236a1d8da`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (835.7ms)[0m  [1m[35mALTER TABLE `foods` ADD CONSTRAINT `fk_rails_a68752f748`
+FOREIGN KEY (`store_id`)
+  REFERENCES `stores` (`id`)
+[0m
+  [1m[35m (837.3ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_25ab61da8d`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (870.1ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_74a66bd6c5`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (837.3ms)[0m  [1m[35mALTER TABLE `stores` ADD CONSTRAINT `fk_rails_b526db2ffb`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (388.1ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT version FROM `schema_migrations`[0m
+  [1m[35m (42.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20171011103349)[0m
+  [1m[35m (43.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20171004122312),
+(20171004120841),
+(20171004121021),
+(20171004123132),
+(20171004122754),
+(20171004121125),
+(20171004122957),
+(20171004120620),
+(20171004121504);
+
+[0m
+  [1m[35m (367.0ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2017-10-11 12:04:08', '2017-10-11 12:04:08')[0m
+  [1m[35m (40.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (368.0ms)[0m  [1m[35mCREATE TABLE `food_pictures` (`id` int AUTO_INCREMENT PRIMARY KEY, `food_id` int NOT NULL, `picture` varchar(255) NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_food_pictures_on_food_id` USING btree (`food_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (877.3ms)[0m  [1m[35mCREATE TABLE `foods` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `price` int, `description` varchar(255), `store_id` int NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_foods_on_store_id` USING btree (`store_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (433.2ms)[0m  [1m[35mCREATE TABLE `reviews` (`id` int AUTO_INCREMENT PRIMARY KEY, `user_id` int NOT NULL, `point` int DEFAULT 0, `content` varchar(255), `false` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `food_id` int NOT NULL,  INDEX `index_reviews_on_food_id` USING btree (`food_id`),  INDEX `index_reviews_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (333.5ms)[0m  [1m[35mCREATE TABLE `stores` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `address` varchar(255), `user_id` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_stores_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (365.4ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) NOT NULL, `name` varchar(255) NOT NULL, `avatar` varchar(255) DEFAULT 'avatar_default.jpg', `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `password_digest` varchar(255) NOT NULL, `remember_digest` varchar(255), `activation_digest` varchar(255), `activated` tinyint(1) DEFAULT 0, `activated_at` datetime, UNIQUE INDEX `index_users_on_email` USING btree (`email`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (750.2ms)[0m  [1m[35mALTER TABLE `food_pictures` ADD CONSTRAINT `fk_rails_4236a1d8da`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (868.3ms)[0m  [1m[35mALTER TABLE `foods` ADD CONSTRAINT `fk_rails_a68752f748`
+FOREIGN KEY (`store_id`)
+  REFERENCES `stores` (`id`)
+[0m
+  [1m[35m (904.4ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_25ab61da8d`
+FOREIGN KEY (`food_id`)
+  REFERENCES `foods` (`id`)
+[0m
+  [1m[35m (1046.5ms)[0m  [1m[35mALTER TABLE `reviews` ADD CONSTRAINT `fk_rails_74a66bd6c5`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (881.6ms)[0m  [1m[35mALTER TABLE `stores` ADD CONSTRAINT `fk_rails_b526db2ffb`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (321.5ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT version FROM `schema_migrations`[0m
+  [1m[35m (42.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20171011103349)[0m
+  [1m[35m (44.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20171004122312),
+(20171004120841),
+(20171004121021),
+(20171004123132),
+(20171004122754),
+(20171004121125),
+(20171004122957),
+(20171004120620),
+(20171004121504);
+
+[0m
+  [1m[35m (321.2ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2017-10-11 12:04:16', '2017-10-11 12:04:16')[0m
+  [1m[35m (49.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m

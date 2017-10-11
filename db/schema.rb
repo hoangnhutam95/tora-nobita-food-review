@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004123132) do
+ActiveRecord::Schema.define(version: 20171011103349) do
 
-  create_table "food_pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  create_table "food_pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "food_id",    null: false
     t.string   "picture",    null: false
     t.datetime "created_at", null: false
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20171004123132) do
     t.index ["food_id"], name: "index_food_pictures_on_food_id", using: :btree
   end
 
-  create_table "foods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  create_table "foods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name",        null: false
     t.integer  "price"
     t.string   "description"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20171004123132) do
     t.index ["store_id"], name: "index_foods_on_store_id", using: :btree
   end
 
-  create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "user_id",                null: false
     t.integer  "point",      default: 0
     t.string   "content"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20171004123132) do
     t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
   end
 
-  create_table "stores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  create_table "stores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name",       null: false
     t.string   "address"
     t.integer  "user_id"
@@ -51,14 +51,17 @@ ActiveRecord::Schema.define(version: 20171004123132) do
     t.index ["user_id"], name: "index_stores_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.string   "email",                                          null: false
-    t.string   "name",                                           null: false
-    t.string   "avatar",          default: "avatar_default.jpg"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.string   "password_digest",                                null: false
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "email",                                            null: false
+    t.string   "name",                                             null: false
+    t.string   "avatar",            default: "avatar_default.jpg"
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.string   "password_digest",                                  null: false
     t.string   "remember_digest"
+    t.string   "activation_digest"
+    t.boolean  "activated",         default: false
+    t.datetime "activated_at"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
