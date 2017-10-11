@@ -3,7 +3,7 @@
 		<a href="/" class="brand-logo"><%= fa_icon "coffee" %> | ベトナムの料理</a>
 		<ul id="nav-mobile" class="right hide-on-med-and-down">
 			<% if logged_in? %>
-                <li><a href="#about-path" onclick="internal_link_click(this)">About</a></li>
+                <li><%= link_to "My stores", my_store_path %></li>
                 <li><a href="#portfolio-path" onclick="internal_link_click(this)">Food</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown" data-toggle="dropdown">

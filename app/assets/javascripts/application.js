@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require_tree .
 
+
 function internal_link_click (link) {
 	// Make sure this.hash has a value before overriding default behavior
 	if (link.hash !== "") {
@@ -30,7 +31,7 @@ function internal_link_click (link) {
 		$('html, body').animate({
 			scrollTop: $(hash).offset().top
 		}, 900, function(){
-		
+
 		// Add hash (#) to URL when done scrolling (default click behavior)
 		window.location.hash = hash;
 		});

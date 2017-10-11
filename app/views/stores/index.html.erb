@@ -1,0 +1,14 @@
+<% provide(:title, "My stores") %>
+<div class="index-users">
+    <div class="container">
+        <div class="list-users">
+            <div class="container">
+                <% @stores.each do |store| %>
+                    <% @store = store %>
+                    <%= render store %>
+                <% end %>
+            </div>
+            <%= will_paginate @stores, class: "pagination-users" %>
+        </div>
+    </div>
+</div>
