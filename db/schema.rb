@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20171004123132) do
 
-  create_table "food_pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "food_pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer  "food_id",    null: false
     t.string   "picture",    null: false
     t.datetime "created_at", null: false
@@ -20,17 +20,17 @@ ActiveRecord::Schema.define(version: 20171004123132) do
     t.index ["food_id"], name: "index_food_pictures_on_food_id", using: :btree
   end
 
-  create_table "foods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "foods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "name",        null: false
     t.integer  "price"
     t.string   "description"
-    t.integer  "user_id",     null: false
+    t.integer  "store_id",    null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["user_id"], name: "index_foods_on_user_id", using: :btree
+    t.index ["store_id"], name: "index_foods_on_store_id", using: :btree
   end
 
-  create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer  "user_id",                null: false
     t.integer  "point",      default: 0
     t.string   "content"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20171004123132) do
     t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
   end
 
-  create_table "stores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "stores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "name",       null: false
     t.string   "address"
     t.integer  "user_id"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20171004123132) do
     t.index ["user_id"], name: "index_stores_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "email",                                          null: false
     t.string   "name",                                           null: false
     t.string   "avatar",          default: "avatar_default.jpg"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20171004123132) do
   end
 
   add_foreign_key "food_pictures", "foods"
-  add_foreign_key "foods", "users"
+  add_foreign_key "foods", "stores"
   add_foreign_key "reviews", "foods"
   add_foreign_key "reviews", "users"
   add_foreign_key "stores", "users"
