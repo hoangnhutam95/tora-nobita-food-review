@@ -26,6 +26,53 @@ body{
 	font-family: 'Montserrat', sans-serif;
 }
 
+.modal-body {
+    padding: 30px !important;
+}
+
+.pre-img {
+    height: 150px;
+    max-width: 500px;
+    border: 1px solid #000;
+    margin: 0px 10px 10px 10px;
+}
+
+.food-cover {
+    height: 150px;
+    width: 100%;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+}
+
+.food-name {
+	font-size: 24px;
+	color : green;
+}
+
+.text-none {
+    text-decoration: none !important;
+}
+
+.text-none:hover {
+    opacity: 0.6;
+}
+
+.food-name:hover {
+	color : blue;
+	text-decoration: none;
+}
+
+.price {
+	font-size: 20px;
+	color : red;
+	margin-bottom: 20px;
+}
+
+.price:hover {
+	text-decoration: none;
+}
+
 $strongGreen: #3cac94;
 
 *:focus{

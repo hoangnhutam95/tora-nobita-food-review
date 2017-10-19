@@ -2,7 +2,7 @@ class StoresController < ApplicationController
     before_action :logged_in_user, only: [:create, :update_store, :destroy, :my_store]
 
     def index
-            @stores = Store.all.order('name ASC')
+            @stores = Store.all.order('created_at ASC')
                 .paginate(page: params[:page], per_page: 6)
     end
 
@@ -18,8 +18,15 @@ class StoresController < ApplicationController
             flash[:info] = "Create success"
             redirect_to :back
         else
-            flash[:info] = "create fail"
+            flash[:danger] = @store.errors.full_messages.join(" & ")
             redirect_to :back
+        end
+    end
+
+    def show
+        @store = Store.find_by(id: params[:id])
+        if @store == nil
+            not_found
         end
     end
 

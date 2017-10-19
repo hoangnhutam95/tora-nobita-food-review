@@ -1,0 +1,129 @@
+<% provide(:title, @store.name + ' レストラン') %>
+<div class="container">
+    <br><br>
+    <% if logged_in? && current_user.id == @store.user.id %>
+        <div class="pull-right">
+            <button type="button" class="waves-effect waves-light btn" data-toggle="modal" data-target="#myModal">食物を加える</button>
+        </div>
+    <% end %>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title center text-success">食物を加える</h4>
+            </div>
+            <div class="modal-body">
+                <%= form_for(:food, url: foods_path) do |f| %>
+                    <%= f.text_field :name, placeholder: "料理の名前- Food name", class: "form-control" %>
+
+                    <%= f.number_field :price, placeholder: "価格-price", class: "form-control" %>
+
+                    <%= f.text_area :description, placeholder: "説明... - Description" %>
+                    <%= f.label :画像をアップロードする, class: 'name' %>
+                    <%= f.hidden_field :store_id, :value => @store.id %>
+
+                    <%= f.file_field :picture1, accept: "image/jpeg,image/gif,image/png", id: "upload-pic1", key: "1"%>
+                    <div class="pull-right">
+                        <a class="remove-image", key="1"%>
+                          <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </div>
+                    <img id="pre-img1" class="pre-img hidden" />
+                    </br>
+
+                    <%= f.file_field :picture2, accept: "image/jpeg,image/gif,image/png", id: "upload-pic2", key: "2" %>
+                    <div class="pull-right">
+                        <a class="remove-image", key="2">
+                          <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </div>
+                    <img id="pre-img2" class="pre-img hidden" />
+
+                    </br>
+
+                    <%= f.file_field :picture3, accept: "image/jpeg,image/gif,image/png", id: "upload-pic3", key: "3" %>
+                    <div class="pull-right">
+                        <a class="remove-image", key="3">
+                          <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </div>
+                    <img id="pre-img3" class="pre-img hidden" />
+                    </br>
+                    <%= f.submit "作成する !", class: "btn-success btn" %>
+                <% end %>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="user-profile">
+        <br><br>
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="avatar">
+                    <% if @store.user.avatar? %>
+                        <%= image_tag @store.user.avatar.url(:thumb) %>
+                    <% else %>
+                        <%= image_tag @store.user.avatar.default_url("avatar_default.jpg") %>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-xs-8">
+                <div class="name-express">
+                    <div class="name"><h2 class="center text-primary post-form">"<%= @store.name %>"レストラン</h2></div>
+                </div>
+                <div class="user-info-express">
+                    <h4> 店主 : <span class="text-success"><%= @store.user.name %></span></h4>
+                    <h4> 店舗の住所 : <span class="text-success"><%= @store.address %></span></h4>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </div>
+
+    <% if @store.foods.count != 0 %>
+    <% @store.foods.each do |food| %>
+        <div class="col-sm-3">
+            <%= link_to food,{:class => "text-none"} do %>
+            <% if food.food_pictures.count !=0 %>
+                <%= image_tag food.food_pictures[0].picture.url, class: "food-cover" %>
+            <% else %>
+                <img src="/assets/default-food.png" class="food-cover">
+            <% end %>
+            <div class="food-name center"><%= food.name %></div>
+            <div class="price center"><%= food.price %>円</div>
+            <% end %>
+        </div>
+        <% end %>
+        <% else %>
+        <div class="center">この店には食べ物はありません。</div>
+    <% end %>
+
+</div>
+
+<script type="text/javascript">
+    for (k = 1; k <= 3; k++) {
+        $('#upload-pic' + k).on('change', function () {
+            var reader = new FileReader();
+            var key = $(this).attr('key');
+            reader.onload = function (e) {
+                document.getElementById('pre-img' + key).src = e.target.result;
+                $('#pre-img' + key).removeClass('hidden');
+            };
+            reader.readAsDataURL(this.files[0]);
+        });
+    }
+
+    $('.remove-image').on('click', function() {
+        var key = $(this).attr('key');
+        $('#pre-img' + key).addClass('hidden').attr('src', '');
+        $('#upload-pic' + key).val('');
+    })
+</script>
+
