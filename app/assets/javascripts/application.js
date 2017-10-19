@@ -53,4 +53,5 @@ $(function(){
 		$.get($(".users-search").attr("action"), $(".users-search").serialize(), null, "script");
 		return false;
 	});
+	$("div.alert").delay(2000).slideUp();
 });

@@ -11,11 +11,13 @@ Rails.application.routes.draw do
     delete '/logout', to: 'sessions#destroy'
     get '/my_store', to: 'stores#my_store'
     post '/update_store', to: 'stores#update_store'
+    get '/create_food', to: 'foods#new'
 
     resources :users
     resources :account_activations, only: [:edit]
     resources :password_resets,     only: [:new, :create, :edit, :update]
     get   '/resend_activation/:email', to: 'account_activations#resend_activation', :constraints => { :email => /[^\/]+/ }
     resources :stores
+    resources :foods
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

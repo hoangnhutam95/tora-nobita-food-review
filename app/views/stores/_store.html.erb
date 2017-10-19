@@ -2,7 +2,7 @@
     <td><%= link_to store.name, store %></td>
     <td><%= store.address %></td>
     <td><%= store.foods.count %></td>
-    <td><div class="btn btn-success edit-store" data-name="<%= store.name %>" data-address="<%= store.address %>" data-id="<%= store.id %>">Edit</td>
+    <td><div class="btn btn-success edit-store" data-name="<%= store.name %>" data-address="<%= store.address %>" data-id="<%= store.id %>" data-toggle="modal" data-target="#myModal">Edit</td>
     <td>
         <div class="setting">
             <div class="dropdown">

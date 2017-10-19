@@ -22,27 +22,27 @@
             <%= will_paginate @stores, class: "pagination-users" %>
         </div>
         <div class="col-xs-4 add-store">
-         <h3 class="text primary">Create my store :</h3>
-         <%= form_for(:store, url: stores_path) do |f| %>
-              <%= f.label :name %>
-              <%= f.text_field :name, :value => nil, placeholder: "Nobita Restaurant", class: 'form-control' %>
-              <%= f.label :address %>
-              <%= f.text_field :address, :value => nil, placeholder: "43 Nguyen Chi Thanh Ha Noi", class: 'form-control' %>
-              <%= f.hidden_field :user_id, :value => current_user.id %>
-              <%= f.submit "Create !", class: "btn-success btn" %>
-        <% end %>
-        <div class="hidden" id="edit-store-area">
-            <h3 class="text primary">Edit store :</h3>
-             <%= form_for(:store, url: update_store_path) do |f| %>
-                  <%= f.label :name %>
-                  <%= f.text_field :name, :value => nil, placeholder: "Nobita Restaurant", class: 'form-control edit-store-name' %>
-                  <%= f.label :address %>
-                  <%= f.text_field :address, :value => nil, placeholder: "43 Nguyen Chi Thanh Ha Noi", class: 'form-control edit-store-address' %>
-                  <%= f.hidden_field :user_id, :value => current_user.id %>
-                  <%= f.hidden_field :id, :value => nil, class: 'edit-store-id'%>
-                  <%= f.submit "Save !", class: "btn-success btn" %>
-            <% end %>
-        </div>
+          <h3 class="text primary">Create my store :</h3>
+          <%= form_for(:store, url: stores_path) do |f| %>
+                <%= f.label :name, class: "name" %>
+                <%= f.text_field :name, :value => nil, placeholder: "Nobita Restaurant", class: 'form-control' %>
+                <%= f.label :address, class: "name" %>
+                <%= f.text_field :address, :value => nil, placeholder: "43 Nguyen Chi Thanh Ha Noi", class: 'form-control' %>
+                <%= f.hidden_field :user_id, :value => current_user.id %>
+                <%= f.submit "Create !", class: "btn-success btn" %>
+          <% end %>
+          <div class="hidden" id="edit-store-area">
+              <h3 class="text primary">Edit store :</h3>
+               <%= form_for(:store, url: update_store_path) do |f| %>
+                    <%= f.label :name, class: "name"%>
+                    <%= f.text_field :name, :value => nil, placeholder: "Nobita Restaurant", class: 'form-control edit-store-name' %>
+                    <%= f.label :address, class: "name" %>
+                    <%= f.text_field :address, :value => nil, placeholder: "43 Nguyen Chi Thanh Ha Noi", class: 'form-control edit-store-address' %>
+                    <%= f.hidden_field :user_id, :value => current_user.id %>
+                    <%= f.hidden_field :id, :value => nil, class: 'edit-store-id'%>
+                    <%= f.submit "Save !", class: "btn-success btn" %>
+              <% end %>
+          </div>
         </div>
     </div>
 </div>
