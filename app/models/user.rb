@@ -11,7 +11,8 @@ class User < ApplicationRecord
     mount_uploader :avatar, AvatarUploader
     validates :password, presence: true, length: {minimum: 8}, allow_nil: true
     validate :avatar_size
-    has_many :store, dependent: :destroy
+    has_many :stores, dependent: :destroy
+    has_many :reviews, dependent: :destroy
 
     # Returns the hash digest of the given string.
     def self.digest string
