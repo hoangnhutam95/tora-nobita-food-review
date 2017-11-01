@@ -22,3 +22,4 @@
 config/database.yml
 log/development.log
 /public/uploads
+/vendor/assets/bower_components

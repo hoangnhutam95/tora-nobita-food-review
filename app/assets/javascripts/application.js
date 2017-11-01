@@ -15,7 +15,11 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
-
+//= require bootstrap-star-rating
+//= require owl.carousel
+//= require owl.carousel/dist/owl.carousel.js
+//= require cardslider/dist/js/jquery.cardslider.min.js
+//= require bootstrap-star-rating/js/star-rating.js
 
 function internal_link_click (link) {
 	// Make sure this.hash has a value before overriding default behavior
@@ -54,4 +58,41 @@ $(function(){
 		return false;
 	});
 	$("div.alert").delay(2000).slideUp();
+	var book_slide = $('.book-list');
+    book_slide.owlCarousel({
+        loop: true,
+        margin: 30,
+        dots: true,
+        autoplayTimeout: 4000,
+        smartSpeed: 600,
+        mouseDrag: true,
+        touchDrag: false,
+        animateIn: 'fadeInLeft',
+        animateOut: 'fadeOutRight',
+        center: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+            992: {
+                items: 2
+            },
+            1500: {
+                items: 4
+            }
+        }
+    });
+    $('.bookslide_nav .testi_next').on('click', function () {
+        book_slide.trigger('next.owl.carousel');
+    });
+    $('.bookslide_nav .testi_prev').on('click', function () {
+        book_slide.trigger('prev.owl.carousel');
+    });
+
+    book_slide.on('translate.owl.carousel', function (property) {
+        $('.book-content .owl-dot:eq(' + property.page.index + ')').click();
+    });
 });

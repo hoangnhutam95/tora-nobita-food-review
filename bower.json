@@ -1,0 +1,25 @@
+{
+  "name": "Food review",
+  "homepage": "https://github.com/hoangnhutam95/tora-nobita-food-review",
+  "authors": [
+    "Hoang Nhu Tam <hoangnhutam95@gmail.com>"
+  ],
+  "description": "Review store and food in store",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-star-rating": "^4.0.2",
+    "owl.carousel": "^2.2.1",
+    "sweetalert": "^2.0.7",
+    "cardslider": "^1.2.1"
+  }
+}
