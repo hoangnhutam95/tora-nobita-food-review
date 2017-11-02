@@ -18,8 +18,6 @@
   ],
   "dependencies": {
     "bootstrap-star-rating": "^4.0.2",
-    "owl.carousel": "^2.2.1",
-    "sweetalert": "^2.0.7",
-    "cardslider": "^1.2.1"
+    "sweetalert": "^2.0.7"
   }
 }

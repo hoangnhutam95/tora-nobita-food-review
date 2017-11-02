@@ -13,8 +13,6 @@
  *= require_tree .
  *= require_self
  *= require bootstrap-star-rating/css/star-rating.min.css
- *= require owl.carousel/dist/assets/owl.carousel.css
- *= require cardslider/dist/css/cardslider.css
  */
 @import "font-awesome";
 @import "materialize";
@@ -27,6 +25,14 @@
 
 body{
 	font-family: 'Montserrat', sans-serif;
+}
+
+.setting-s {
+    margin-left: 700px;
+}
+
+.content-review {
+    margin-left: 20px;
 }
 
 .modal-body {

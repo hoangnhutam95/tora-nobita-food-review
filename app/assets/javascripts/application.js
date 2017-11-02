@@ -11,15 +11,11 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-star-rating
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
-//= require bootstrap-star-rating
-//= require owl.carousel
-//= require owl.carousel/dist/owl.carousel.js
-//= require cardslider/dist/js/jquery.cardslider.min.js
-//= require bootstrap-star-rating/js/star-rating.js
 
 function internal_link_click (link) {
 	// Make sure this.hash has a value before overriding default behavior
@@ -52,47 +48,16 @@ $(window).scroll(function (event) {
 	}
 });
 
-$(function(){
+$(document).on('turbolinks:load', function() {
 	$(".search-box").keyup(function(){
 		$.get($(".users-search").attr("action"), $(".users-search").serialize(), null, "script");
 		return false;
 	});
 	$("div.alert").delay(2000).slideUp();
-	var book_slide = $('.book-list');
-    book_slide.owlCarousel({
-        loop: true,
-        margin: 30,
-        dots: true,
-        autoplayTimeout: 4000,
-        smartSpeed: 600,
-        mouseDrag: true,
-        touchDrag: false,
-        animateIn: 'fadeInLeft',
-        animateOut: 'fadeOutRight',
-        center: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 2
-            },
-            992: {
-                items: 2
-            },
-            1500: {
-                items: 4
-            }
-        }
-    });
-    $('.bookslide_nav .testi_next').on('click', function () {
-        book_slide.trigger('next.owl.carousel');
-    });
-    $('.bookslide_nav .testi_prev').on('click', function () {
-        book_slide.trigger('prev.owl.carousel');
-    });
 
-    book_slide.on('translate.owl.carousel', function (property) {
-        $('.book-content .owl-dot:eq(' + property.page.index + ')').click();
+    $('.text-primary').on('click', function () {
+        alert('ok');
     });
+    $('#myCarousel').carousel();
+    $('#rating-review').rating({'min' : '0', 'max' : '5', 'step' : '1', 'size' : 'xs'});
 });
