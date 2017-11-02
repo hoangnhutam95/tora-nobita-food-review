@@ -90,7 +90,7 @@
     <% if @store.foods.count != 0 %>
     <% @store.foods.each do |food| %>
         <div class="col-sm-3">
-            <%= link_to food,{:class => "text-none"} do %>
+            <%= link_to food, {:class => "text-none"} do %>
             <% if food.food_pictures.count !=0 %>
                 <%= image_tag food.food_pictures[0].picture.url, class: "food-cover" %>
             <% else %>

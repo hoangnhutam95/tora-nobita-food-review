@@ -1,0 +1,6 @@
+<% @reviews = food.reviews %>
+<% if (@reviews.length > 0) %>
+    <% @reviews.reverse.each do |review| %>
+        <%= render 'foods/reviews', food: food, review: review %>
+    <% end %>
+<% end %>
