@@ -49,6 +49,10 @@ $(window).scroll(function (event) {
 });
 
 $(document).on('turbolinks:load', function() {
+	$(".food_pictures").each(function() {
+		urlImage = $(this).data('image');
+		$(this).css("background-image", "url("+urlImage+")");
+	});
 	$(".search-box").keyup(function(){
 		$.get($(".users-search").attr("action"), $(".users-search").serialize(), null, "script");
 		return false;
@@ -56,8 +60,15 @@ $(document).on('turbolinks:load', function() {
 	$("div.alert").delay(2000).slideUp();
 
     $('.text-primary').on('click', function () {
-        alert('ok');
+
     });
     $('#myCarousel').carousel();
     $('#rating-review').rating({'min' : '0', 'max' : '5', 'step' : '1', 'size' : 'xs'});
+    $('#point-ave').rating({displayOnly: true, step: 0.5});
+    $(".point-aven").each(function() {
+		$(this).rating({displayOnly: true, step: 0.5, size: 'xs'});
+	});
+	$('.edit-food').on('click', function(e) {
+		e.preventDefault();
+	});
 });

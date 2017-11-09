@@ -1,4 +1,4 @@
-<% provide(:title, @food.name + ' store') %>
+<% provide(:title, @food.name) %>
 <section class="relative fix gray-bg">
     <div class="container">
         <div class="space-30"></div>
@@ -64,9 +64,14 @@
                         <h4 class="text-success">食べ物の名前: </h4>
                         <p class="lead text-primary"><%= @food.name %></p>
                         <h4 class="tip-left">価格: <span class="price"><%= @food.price %>円</span></h4>
-                        <h4 class="">レストラン: <span class="lead text-primary"><%= @food.store.name %></span></h4>
+                        <h4 class="">レストラン: <span class="lead text-primary"><%= link_to @food.store.name, @food.store %></span></h4>
                         <h4 class="">説明: </h4>
                         <h5 class="lead text-primary"><%= @food.description %></h5>
+                        <% if @food.reviews.count != 0 %>
+                        <input id="point-ave" name="input-3" value="<%= @food.reviews.sum(:point)/(@food.reviews.count*1.0) %>" class="rating-loading">
+                        <% else %>
+                            <input class="point-aven"  value="0" class="rating-loading">
+                        <% end %>
                     </div>
                 </div>
             </div>
