@@ -1,110 +1,303 @@
 <% provide(:title, @store.name + ' レストラン') %>
 <div class="container">
     <br><br>
+    <br><br>
     <% if logged_in? && current_user.id == @store.user.id %>
         <div class="pull-right">
             <button type="button" class="waves-effect waves-light btn" data-toggle="modal" data-target="#myModal">食物を加える</button>
         </div>
     <% end %>
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
-    <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title center text-success">食物を加える</h4>
-            </div>
-            <div class="modal-body">
-                <%= form_for(:food, url: foods_path) do |f| %>
-                    <%= f.text_field :name, placeholder: "料理の名前- Food name", class: "form-control" %>
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title center text-success">食物を加える</h4>
+                </div>
+                <div class="modal-body">
+                    <%= form_for(:food, url: foods_path) do |f| %>
+                        <%= f.text_field :name, placeholder: "料理の名前- Food name", class: "form-control" %>
 
-                    <%= f.number_field :price, placeholder: "価格-price", class: "form-control" %>
+                        <%= f.number_field :price, placeholder: "価格-price", class: "form-control" %>
 
-                    <%= f.text_area :description, placeholder: "説明... - Description" %>
-                    <%= f.label :画像をアップロードする, class: 'name' %>
-                    <%= f.hidden_field :store_id, :value => @store.id %>
+                        <%= f.text_area :description,size: "50x5", :required => true, placeholder: "説明... - Description", class: 'form-control bg-info b-r-0' %>
+                        <%= f.label :画像をアップロードする, class: 'name' %>
+                        <%= f.hidden_field :store_id, :value => @store.id %>
 
-                    <%= f.file_field :picture1, accept: "image/jpeg,image/gif,image/png", id: "upload-pic1", key: "1"%>
-                    <div class="pull-right">
-                        <a class="remove-image", key="1"%>
-                          <span class="glyphicon glyphicon-remove"></span>
-                        </a>
-                    </div>
-                    <img id="pre-img1" class="pre-img hidden" />
-                    </br>
+                        <%= f.file_field :picture1, accept: "image/jpeg,image/gif,image/png", id: "upload-pic1", key: "1"%>
+                        <div class="pull-right">
+                            <a class="remove-image", key="1"%>
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </div>
+                        <img id="pre-img1" class="pre-img hidden" />
+                        </br>
 
-                    <%= f.file_field :picture2, accept: "image/jpeg,image/gif,image/png", id: "upload-pic2", key: "2" %>
-                    <div class="pull-right">
-                        <a class="remove-image", key="2">
-                          <span class="glyphicon glyphicon-remove"></span>
-                        </a>
-                    </div>
-                    <img id="pre-img2" class="pre-img hidden" />
+                        <%= f.file_field :picture2, accept: "image/jpeg,image/gif,image/png", id: "upload-pic2", key: "2" %>
+                        <div class="pull-right">
+                            <a class="remove-image", key="2">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </div>
+                        <img id="pre-img2" class="pre-img hidden" />
 
-                    </br>
+                        </br>
 
-                    <%= f.file_field :picture3, accept: "image/jpeg,image/gif,image/png", id: "upload-pic3", key: "3" %>
-                    <div class="pull-right">
-                        <a class="remove-image", key="3">
-                          <span class="glyphicon glyphicon-remove"></span>
-                        </a>
-                    </div>
-                    <img id="pre-img3" class="pre-img hidden" />
-                    </br>
-                    <%= f.submit "作成する !", class: "btn-success btn" %>
-                <% end %>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-    <div class="user-profile">
-        <br><br>
-        <div class="row">
-            <div class="col-xs-4">
-                <div class="avatar">
-                    <% if @store.user.avatar? %>
-                        <%= image_tag @store.user.avatar.url(:thumb) %>
-                    <% else %>
-                        <%= image_tag @store.user.avatar.default_url("avatar_default.jpg") %>
+                        <%= f.file_field :picture3, accept: "image/jpeg,image/gif,image/png", id: "upload-pic3", key: "3" %>
+                        <div class="pull-right">
+                            <a class="remove-image", key="3">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </div>
+                        <img id="pre-img3" class="pre-img hidden" />
+                        </br>
+                        <%= f.submit "作成する !", class: "btn-success btn" %>
                     <% end %>
                 </div>
-            </div>
-            <div class="col-xs-8">
-                <div class="name-express">
-                    <div class="name"><h2 class="center text-primary post-form">"<%= @store.name %>"レストラン</h2></div>
-                </div>
-                <div class="user-info-express">
-                    <h4> 店主 : <span class="text-success"><%= @store.user.name %></span></h4>
-                    <h4> 店舗の住所 : <span class="text-success"><%= @store.address %></span></h4>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-        <br><br>
     </div>
+    <div class="content">
+        <div class="container present">
+            <div class="portfolio" id="portfolio-path">
+                <div class="overview">
+                    <div class="title">"<%= @store.name %>"レストラン</div>
+                    <div class="caption">
+                        店主 : <span class="text-success"><%= @store.user.name %></span>
+                    </div>
+                    <div class="caption">
+                        店舗の住所 : <span class="text-success"><%= @store.address %></span></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <% if @store.foods.count != 0 %>
+                        <% @store.foods.each do |food| %>
+                            <div class="item col-md-4">
+                            <%= link_to food, {:class => "text-none"} do %>
+                                <% if food.food_pictures.count !=0 %>
+                                <div class="portfolio-pic food_pictures" data-image="<%= food.food_pictures[0].picture.url %>">
+                                <% else %>
+                                <div class="portfolio-pic food_pictures" data-image="/uploads/default-food.png">
+                                <% end %>
+                                    <div class="portfolio-content">
+                                        <span class="label label-primary"><%= food.store.name %></span>
+                                        <div class="portfolio-title food-name" title="<%= food.name %>"><%= food.name %></div>
+                                        <div class="label label-danger"><%= food.price %> 円</div>
+                                        <div class="label label-success"><%= food.reviews.count %> レビュー</div>
+                                        <% if food.reviews.count != 0 %>
+                                        <input class="point-aven"  value="<%= food.reviews.sum(:point)/(food.reviews.count*1.0) %>" class="rating-loading">
+                                        <% else %>
+                                            <input class="point-aven"  value="0" class="rating-loading">
+                                        <% end %>
+                                        <% if logged_in? && current_user.id == @store.user.id %>
+                                            <div class="edit-food label label-success" data-toggle="modal" data-target="#editModal<%= food.id %>">エディット</div>
+                                            <div class="delete-food label label-danger">デリート</div>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            <% end %>
+                            </div>
+                            <% if logged_in? && current_user.id == @store.user.id %>
+                                <div id="editModal<%= food.id %>" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
 
-    <% if @store.foods.count != 0 %>
-    <% @store.foods.each do |food| %>
-        <div class="col-sm-3">
-            <%= link_to food, {:class => "text-none"} do %>
-            <% if food.food_pictures.count !=0 %>
-                <%= image_tag food.food_pictures[0].picture.url, class: "food-cover" %>
-            <% else %>
-                <img src="/assets/default-food.png" class="food-cover">
-            <% end %>
-            <div class="food-name center"><%= food.name %></div>
-            <div class="price center"><%= food.price %>円</div>
-            <% end %>
+                                    <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title center text-success">食べ物を編集する</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <%= form_for(food) do |f| %>
+                                                    <%= f.text_field :name, placeholder: "料理の名前- Food name", class: "form-control edit-name" %>
+
+                                                    <%= f.number_field :price, placeholder: "価格-price", class: "form-control" %>
+
+                                                    <%= f.text_area :description,size: "50x5", :required => true, placeholder: "説明... - Description", class: 'form-control bg-info b-r-0' %>
+                                                    <%= f.label :画像をアップロードする, class: 'name' %>
+                                                    <%= f.hidden_field :store_id, :value => @store.id %>
+                                                    <% if food.food_pictures.count == 0 %>
+                                                        <div class="pull-left">画像1：</div>
+                                                        <%= f.file_field :picture1, accept: "image/jpeg,image/gif,image/png", class: "update-pic", key: "1-#{food.id}"%>
+                                                        <div class="pull-right">
+                                                            <a class="remove-image-update", key="1"%>
+                                                              <span class="glyphicon glyphicon-remove"></span>
+                                                            </a>
+                                                        </div>
+                                                        <img id="update-pre-img1-<%= food.id %>" class="pre-img hidden" />
+                                                        <div class="pull-left">画像2：</div>
+
+                                                        <%= f.file_field :picture2, accept: "image/jpeg,image/gif,image/png", class: "update-pic", key: "2-#{food.id}" %>
+                                                        <div class="pull-right">
+                                                            <a class="remove-image-update", key="2">
+                                                              <span class="glyphicon glyphicon-remove"></span>
+                                                            </a>
+                                                        </div>
+                                                        <img id="update-pre-img2-<%= food.id %>" class="pre-img hidden" />
+
+                                                        <div class="pull-left">画像3：</div>
+
+                                                        <%= f.file_field :picture3, accept: "image/jpeg,image/gif,image/png", class: "update-pic", key: "3-#{food.id}" %>
+                                                        <div class="pull-right">
+                                                            <a class="remove-image-update", key="3">
+                                                              <span class="glyphicon glyphicon-remove"></span>
+                                                            </a>
+                                                        </div>
+                                                        <img id="update-pre-img3-<%= food.id %>" class="pre-img hidden" />
+                                                    <% elsif food.food_pictures.count == 1 %>
+                                                        <div class="pull-left">画像1：</div>
+                                                        <div class="edit-profile">
+                                                            <div class="left-block-edit">
+                                                                <div class="propic-edit">
+                                                                    <% if food.food_pictures[0].picture? %>
+                                                                        <%= image_tag food.food_pictures[0].picture.url, id: "image1-#{food.id}", class: 'edit-image-food' %>
+                                                                    <% else %>
+                                                                        <%= image_tag current_user.avatar.default_url("avatar_default.jpg"), id: "image1"%>
+                                                                    <% end %>
+                                                                    <%= f.file_field :picture1, accept: "image/jpeg,image/gif,image/png",    id: "upload-pict1-#{food.id}", key: "1-#{food.id}", class: 'upload-picture-food' %>
+                                                                    <a class="upload-new-pic1" href="#" key="<%= food.id %>">
+                                                                        <i class="fa fa-camera" aria-hidden="true"></i>画像の変更
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="pull-left">画像2：</div>
+                                                        <%= f.file_field :picture2, accept: "image/jpeg,image/gif,image/png", class: "update-pic", key: "2-#{food.id}" %>
+                                                        <div class="pull-right">
+                                                            <a class="remove-image-update", key="2">
+                                                              <span class="glyphicon glyphicon-remove"></span>
+                                                            </a>
+                                                        </div>
+                                                        <img id="update-pre-img2-<%= food.id %>" class="pre-img hidden" />
+
+                                                        <div class="pull-left">画像3：</div>
+
+                                                        <%= f.file_field :picture3, accept: "image/jpeg,image/gif,image/png", class: "update-pic", key: "3-#{food.id}" %>
+                                                        <div class="pull-right">
+                                                            <a class="remove-image-update", key="3">
+                                                              <span class="glyphicon glyphicon-remove"></span>
+                                                            </a>
+                                                        </div>
+                                                        <img id="update-pre-img3-<%= food.id %>" class="pre-img hidden" />
+                                                    <% elsif food.food_pictures.count == 2 %>
+                                                        <div class="pull-left">画像1：</div>
+                                                        <div class="edit-profile">
+                                                            <div class="left-block-edit">
+                                                                <div class="propic-edit">
+                                                                    <% if food.food_pictures[0].picture? %>
+                                                                        <%= image_tag food.food_pictures[0].picture.url, id: "image1-#{food.id}", class: 'edit-image-food' %>
+                                                                    <% else %>
+                                                                        <%= image_tag current_user.avatar.default_url("avatar_default.jpg"), id: "image1"%>
+                                                                    <% end %>
+                                                                    <%= f.file_field :picture1, accept: "image/jpeg,image/gif,image/png", id: "upload-pict1-#{food.id}", key: "1-#{food.id}", class: 'upload-picture-food' %>
+                                                                    <a class="upload-new-pic1" href="#" key="<%= food.id %>">
+                                                                        <i class="fa fa-camera" aria-hidden="true"></i>画像の変更
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="pull-left">画像2：</div>
+                                                        <div class="edit-profile">
+                                                            <div class="left-block-edit">
+                                                                <div class="propic-edit">
+                                                                    <% if food.food_pictures[1].picture? %>
+                                                                        <%= image_tag food.food_pictures[1].picture.url, id: "image2-#{food.id}", class: 'edit-image-food' %>
+                                                                    <% else %>
+                                                                        <%= image_tag current_user.avatar.default_url("avatar_default.jpg"), id: "image2"%>
+                                                                    <% end %>
+                                                                    <%= f.file_field :picture2, accept: "image/jpeg,image/gif,image/png", id: "upload-pict2-#{food.id}", key: "2-#{food.id}", class: 'upload-picture-food' %>
+                                                                    <a class="upload-new-pic2" href="#" key="<%= food.id %>">
+                                                                        <i class="fa fa-camera" aria-hidden="true"></i>画像の変更
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="pull-left">画像3：</div>
+
+                                                        <%= f.file_field :picture3, accept: "image/jpeg,image/gif,image/png", class: "update-pic", key: "3-#{food.id}" %>
+                                                        <div class="pull-right">
+                                                            <a class="remove-image-update", key="3">
+                                                              <span class="glyphicon glyphicon-remove"></span>
+                                                            </a>
+                                                        </div>
+                                                        <img id="update-pre-img3-<%= food.id %>" class="pre-img hidden" />
+                                                    <% elsif food.food_pictures.count == 3 %>
+                                                        <div class="pull-left">画像1：</div>
+                                                        <div class="edit-profile">
+                                                            <div class="left-block-edit">
+                                                                <div class="propic-edit">
+                                                                    <% if food.food_pictures[0].picture? %>
+                                                                        <%= image_tag food.food_pictures[0].picture.url, id: "image1-#{food.id}", class: 'edit-image-food' %>
+                                                                    <% else %>
+                                                                        <%= image_tag current_user.avatar.default_url("avatar_default.jpg"), id: "image1"%>
+                                                                    <% end %>
+                                                                    <%= f.file_field :picture1, accept: "image/jpeg,image/gif,image/png", id: "upload-pict1-#{food.id}", key: "1-#{food.id}", class: 'upload-picture-food' %>
+                                                                    <a class="upload-new-pic1" href="#" key="<%= food.id %>">
+                                                                        <i class="fa fa-camera" aria-hidden="true"></i>画像の変更
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="pull-left">画像2：</div>
+                                                        <div class="edit-profile">
+                                                            <div class="left-block-edit">
+                                                                <div class="propic-edit">
+                                                                    <% if food.food_pictures[1].picture? %>
+                                                                        <%= image_tag food.food_pictures[1].picture.url, id: "image2-#{food.id}", class: 'edit-image-food' %>
+                                                                    <% else %>
+                                                                        <%= image_tag current_user.avatar.default_url("avatar_default.jpg"), id: "image2"%>
+                                                                    <% end %>
+                                                                    <%= f.file_field :picture2, accept: "image/jpeg,image/gif,image/png", id: "upload-pict2-#{food.id}", key: "2-#{food.id}", class: 'upload-picture-food' %>
+                                                                    <a class="upload-new-pic2" href="#" key="<%= food.id %>">
+                                                                        <i class="fa fa-camera" aria-hidden="true"></i>画像の変更
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="pull-left">画像3：</div>
+                                                        <div class="edit-profile">
+                                                            <div class="left-block-edit">
+                                                                <div class="propic-edit">
+                                                                    <% if food.food_pictures[2].picture? %>
+                                                                        <%= image_tag food.food_pictures[2].picture.url, id: "image3-#{food.id}", class: 'edit-image-food' %>
+                                                                    <% else %>
+                                                                        <%= image_tag current_user.avatar.default_url("avatar_default.jpg"), id: "image3"%>
+                                                                    <% end %>
+                                                                    <%= f.file_field :picture3, accept: "image/jpeg,image/gif,image/png", id: "upload-pict3-#{food.id}", key: "3-#{food.id}", class: 'upload-picture-food' %>
+                                                                    <a class="upload-new-pic3" href="#" key="<%= food.id %>">
+                                                                        <i class="fa fa-camera" aria-hidden="true"></i>画像の変更
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <% end %>
+                                                    </br>
+                                                    <%= f.submit "作成する !", class: "btn-success btn" %>
+                                                <% end %>
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% end %>
+                        <% end %>
+                    <% else %>
+                        <div class="center">この店には食べ物はありません。</div>
+                    <% end %>
+                    <div class="hidden" id="count-food" data-count="<%= @store.foods.count %>"></div>
+                </div>
+            </div>
         </div>
-        <% end %>
-        <% else %>
-        <div class="center">この店には食べ物はありません。</div>
-    <% end %>
-
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -120,10 +313,56 @@
         });
     }
 
+        $('.update-pic').each(function () {
+            $(this).on('change', function () {
+                var reader = new FileReader();
+                var key = $(this).attr('key');
+                reader.onload = function (e) {
+                    document.getElementById('update-pre-img' + key).src = e.target.result;
+                    $('#update-pre-img' + key).removeClass('hidden');
+                };
+                reader.readAsDataURL(this.files[0]);
+            });
+
+        });
+
+    $('.upload-picture-food').each(function () {
+        $(this).on('change', function() {
+            var reader = new FileReader();
+            var key = $(this).attr('key');
+            alert(key);
+            reader.onload = function (e) {
+                document.getElementById('image' + key).src = e.target.result;
+            };
+            reader.readAsDataURL(this.files[0]);
+        });
+    });
+
+    $("a.upload-new-pic1").on("click",function(e){
+        e.preventDefault();
+        $("#upload-pict1-" + $(this).attr('key')).trigger("click");
+    });
+    $("a.upload-new-pic2").on("click",function(e){
+        e.preventDefault();
+        $("#upload-pict2-" + $(this).attr('key')).trigger("click");
+    });
+    $("a.upload-new-pic3").on("click",function(e){
+        e.preventDefault();
+        $("#upload-pict3-" + $(this).attr('key')).trigger("click");
+    });
+
+
     $('.remove-image').on('click', function() {
         var key = $(this).attr('key');
         $('#pre-img' + key).addClass('hidden').attr('src', '');
         $('#upload-pic' + key).val('');
-    })
+    });
+
+    $('.remove-image-update').on('click', function() {
+        var key = $(this).attr('key');
+        $('#update-pre-img' + key).addClass('hidden').attr('src', '');
+        $('#update-pic' + key).val('');
+    });
+
 </script>
 

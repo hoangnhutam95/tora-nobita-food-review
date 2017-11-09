@@ -45,9 +45,22 @@
                 border-radius: 6px;
                 float: left;
             }
+            .upload-picture-food{
+                display: none;
+            }
             #upload-pic{
                 display: none;
             }
+            #upload-pict1{
+                display: none;
+            }
+            #upload-pict2{
+                display: none;
+            }
+            #upload-pict3{
+                display: none;
+            }
+
             a.upload-new-pic{
                 opacity: 0;
                 z-index: 2;
@@ -70,9 +83,88 @@
                     margin-right: 20px;
                 }
             }
+            a.upload-new-pic1{
+                opacity: 0;
+                z-index: 2;
+                display: inline-block;
+                font-size: 1.2em;
+                float: left;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 60px;
+                width: 100%;
+                padding: 20px 20px;
+                color: white;
+                cursor: pointer;
+                text-decoration: none;
+                &:focus, &:hover{
+                    color: white;
+                }
+                .fa-camera{
+                    margin-right: 20px;
+                }
+            }
+            a.upload-new-pic2{
+                opacity: 0;
+                z-index: 2;
+                display: inline-block;
+                font-size: 1.2em;
+                float: left;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 60px;
+                width: 100%;
+                padding: 20px 20px;
+                color: white;
+                cursor: pointer;
+                text-decoration: none;
+                &:focus, &:hover{
+                    color: white;
+                }
+                .fa-camera{
+                    margin-right: 20px;
+                }
+            }
+            a.upload-new-pic3{
+                opacity: 0;
+                z-index: 2;
+                display: inline-block;
+                font-size: 1.2em;
+                float: left;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 60px;
+                width: 100%;
+                padding: 20px 20px;
+                color: white;
+                cursor: pointer;
+                text-decoration: none;
+                &:focus, &:hover{
+                    color: white;
+                }
+                .fa-camera{
+                    margin-right: 20px;
+                }
+            }
+
         }
         .propic-edit:hover{
             .upload-new-pic{
+                opacity: 1;
+                transition: all .5s ease;
+            }
+            .upload-new-pic1{
+                opacity: 1;
+                transition: all .5s ease;
+            }
+            .upload-new-pic2{
+                opacity: 1;
+                transition: all .5s ease;
+            }
+            .upload-new-pic3{
                 opacity: 1;
                 transition: all .5s ease;
             }

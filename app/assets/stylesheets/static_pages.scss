@@ -32,12 +32,7 @@ $shadowColor: #bbbbbb;
         font-size: 1.1em;
         margin: 25px 0;
     }
-    .btn{
-        background-color: #ff7a69;
-        &:hover{
-            background-color: #f55c49;
-        }
-    }
+
     .jumbotron{
         background-image: url('/assets/cover-pic.jpg');
         background-position: center center;

@@ -27,6 +27,21 @@ body{
 	font-family: 'Montserrat', sans-serif;
 }
 
+.edit-food:hover {
+    background-color: #009af5;
+}
+
+.edit-image-food {
+    width: 240px !important;
+    height: 200px !important;
+}
+
+.food-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .setting-s {
     margin-left: 700px;
 }

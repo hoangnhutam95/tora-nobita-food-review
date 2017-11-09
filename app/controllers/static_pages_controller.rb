@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
     def home
-        if logged_in?
-        end
+        @foods = Food.all.order('created_at DESC')
+                .paginate(page: params[:page], per_page: 20)
     end
 end
