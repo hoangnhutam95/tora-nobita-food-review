@@ -126,26 +126,27 @@
                                                         <div class="pull-left">画像1：</div>
                                                         <%= f.file_field :picture1, accept: "image/jpeg,image/gif,image/png", class: "update-pic", key: "1-#{food.id}"%>
                                                         <div class="pull-right">
-                                                            <a class="remove-image-update", key="1"%>
+                                                            <a class="remove-image-update", key="1-<%= food.id %>"%>
                                                               <span class="glyphicon glyphicon-remove"></span>
                                                             </a>
                                                         </div>
                                                         <img id="update-pre-img1-<%= food.id %>" class="pre-img hidden" />
+                                                        <br>
                                                         <div class="pull-left">画像2：</div>
 
                                                         <%= f.file_field :picture2, accept: "image/jpeg,image/gif,image/png", class: "update-pic", key: "2-#{food.id}" %>
                                                         <div class="pull-right">
-                                                            <a class="remove-image-update", key="2">
+                                                            <a class="remove-image-update", key="2-<%= food.id %>">
                                                               <span class="glyphicon glyphicon-remove"></span>
                                                             </a>
                                                         </div>
                                                         <img id="update-pre-img2-<%= food.id %>" class="pre-img hidden" />
-
+                                                        <br>
                                                         <div class="pull-left">画像3：</div>
 
                                                         <%= f.file_field :picture3, accept: "image/jpeg,image/gif,image/png", class: "update-pic", key: "3-#{food.id}" %>
                                                         <div class="pull-right">
-                                                            <a class="remove-image-update", key="3">
+                                                            <a class="remove-image-update", key="3-<%= food.id %>">
                                                               <span class="glyphicon glyphicon-remove"></span>
                                                             </a>
                                                         </div>
@@ -167,20 +168,21 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <br>
                                                         <div class="pull-left">画像2：</div>
                                                         <%= f.file_field :picture2, accept: "image/jpeg,image/gif,image/png", class: "update-pic", key: "2-#{food.id}" %>
                                                         <div class="pull-right">
-                                                            <a class="remove-image-update", key="2">
+                                                            <a class="remove-image-update", key="2-<%= food.id %>">
                                                               <span class="glyphicon glyphicon-remove"></span>
                                                             </a>
                                                         </div>
                                                         <img id="update-pre-img2-<%= food.id %>" class="pre-img hidden" />
-
+                                                        <br>
                                                         <div class="pull-left">画像3：</div>
 
                                                         <%= f.file_field :picture3, accept: "image/jpeg,image/gif,image/png", class: "update-pic", key: "3-#{food.id}" %>
                                                         <div class="pull-right">
-                                                            <a class="remove-image-update", key="3">
+                                                            <a class="remove-image-update", key="3-<%= food.id %>">
                                                               <span class="glyphicon glyphicon-remove"></span>
                                                             </a>
                                                         </div>
@@ -202,6 +204,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <br>
                                                         <div class="pull-left">画像2：</div>
                                                         <div class="edit-profile">
                                                             <div class="left-block-edit">
@@ -218,12 +221,12 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
+                                                        <br>
                                                         <div class="pull-left">画像3：</div>
 
                                                         <%= f.file_field :picture3, accept: "image/jpeg,image/gif,image/png", class: "update-pic", key: "3-#{food.id}" %>
                                                         <div class="pull-right">
-                                                            <a class="remove-image-update", key="3">
+                                                            <a class="remove-image-update", key="3-<%= food.id %>">
                                                               <span class="glyphicon glyphicon-remove"></span>
                                                             </a>
                                                         </div>
@@ -245,6 +248,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <br>
                                                         <div class="pull-left">画像2：</div>
                                                         <div class="edit-profile">
                                                             <div class="left-block-edit">
@@ -261,6 +265,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <br>
                                                         <div class="pull-left">画像3：</div>
                                                         <div class="edit-profile">
                                                             <div class="left-block-edit">
@@ -279,7 +284,7 @@
                                                         </div>
                                                     <% end %>
                                                     </br>
-                                                    <%= f.submit "作成する !", class: "btn-success btn" %>
+                                                    <%= f.submit "エディット !", class: "btn-success btn" %>
                                                 <% end %>
                                             </div>
                                             <div class="modal-footer">
@@ -313,24 +318,22 @@
         });
     }
 
-        $('.update-pic').each(function () {
-            $(this).on('change', function () {
-                var reader = new FileReader();
-                var key = $(this).attr('key');
-                reader.onload = function (e) {
-                    document.getElementById('update-pre-img' + key).src = e.target.result;
-                    $('#update-pre-img' + key).removeClass('hidden');
-                };
-                reader.readAsDataURL(this.files[0]);
-            });
-
+    $('.update-pic').each(function () {
+        $(this).on('change', function () {
+            var reader = new FileReader();
+            var key = $(this).attr('key');
+            reader.onload = function (e) {
+                document.getElementById('update-pre-img' + key).src = e.target.result;
+                $('#update-pre-img' + key).removeClass('hidden');
+            };
+            reader.readAsDataURL(this.files[0]);
         });
+    });
 
     $('.upload-picture-food').each(function () {
         $(this).on('change', function() {
             var reader = new FileReader();
             var key = $(this).attr('key');
-            alert(key);
             reader.onload = function (e) {
                 document.getElementById('image' + key).src = e.target.result;
             };

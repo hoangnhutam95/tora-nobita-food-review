@@ -10,37 +10,82 @@
 	</div>
 	<div class="container present">
 		<div class="portfolio" id="portfolio-path">
-			<div class="overview">
-				<div class="title">食べ物</div>
-				<div class="caption">
-					最新の料理があります。
-				</div>
+			<div class="col-md-6">
+				<div class="btn btn-sm btn-susscess time-sort-btn">アップロード時間で並べ替えます。</div>
 			</div>
-			<div class="row">
-				<% @foods.each do |food| %>
-                    <div class="item col-md-4">
-                    <%= link_to food, {:class => "text-none"} do %>
-                    	<% if food.food_pictures.count !=0 %>
-                    	<div class="portfolio-pic food_pictures" data-image="<%= food.food_pictures[0].picture.url %>">
-			            <% else %>
-		            	<div class="portfolio-pic food_pictures" data-image="/uploads/default-food.png">
-			            <% end %>
-							<div class="portfolio-content">
-								<span class="label label-primary"><%= food.store.name %></span>
-								<div class="portfolio-title food-name" title="<%= food.name %>"><%= food.name %></div>
-								<div class="label label-danger"><%= food.price %> 円</div>
-								<div class="label label-success"><%= food.reviews.count %>
-								レビュー</div>
-								<% if food.reviews.count != 0 %>
-                                <input class="point-aven"  value="<%= food.reviews.sum(:point)/(food.reviews.count*1.0) %>" class="rating-loading">
-                                <% else %>
-                                    <input class="point-aven"  value="0" class="rating-loading">
-                                <% end %>
-							</div>
-						</div>
-					<% end %>
+			<div class="col-md-6">
+				<div class="btn btn-xs btn-susscess point-sort-btn">評価で並べ替えます。</div>
+			</div>
+			<div class='time-sort'>
+				<div class="overview">
+					<div class="title">食べ物</div>
+					<div class="caption">
+						最新の料理があります。
 					</div>
-                <% end %>
+				</div>
+				<div class="row">
+				<% if @foods.count !=0 %>
+					<% @foods.each do |food| %>
+	                    <div class="item col-md-4">
+	                    <%= link_to food, {:class => "text-none"} do %>
+	                    	<% if food.food_pictures.count !=0 %>
+	                    	<div class="portfolio-pic food_pictures" data-image="<%= food.food_pictures[0].picture.url %>">
+				            <% else %>
+			            	<div class="portfolio-pic food_pictures" data-image="/uploads/default-food.png">
+				            <% end %>
+								<div class="portfolio-content">
+									<span class="label label-primary"><%= food.store.name %></span>
+									<div class="portfolio-title food-name" title="<%= food.name %>"><%= food.name %></div>
+									<div class="label label-danger"><%= food.price %> 円</div>
+									<div class="label label-success"><%= food.reviews.count %>
+									レビュー</div>
+									<% if food.reviews.count != 0 %>
+	                                <input class="point-aven"  value="<%= food.reviews.sum(:point)/(food.reviews.count*1.0) %>" class="rating-loading">
+	                                <% else %>
+	                                    <input class="point-aven"  value="0" class="rating-loading">
+	                                <% end %>
+								</div>
+							</div>
+						<% end %>
+						</div>
+	                <% end %>
+				</div>
+				<% end %>
+			</div>
+			<div class="point-sort hidden">
+				<div class="overview">
+					<div class="title">食べ物</div>
+					<div class="caption">
+						好きな食べ物。
+					</div>
+				</div>
+				<% if @foodsRate.count !=0 %>
+					<% @foodsRate.each do |food| %>
+	                    <div class="item col-md-4">
+	                    <%= link_to food, {:class => "text-none"} do %>
+	                    	<% if food.food_pictures.count !=0 %>
+	                    	<div class="portfolio-pic food_pictures" data-image="<%= food.food_pictures[0].picture.url %>">
+				            <% else %>
+			            	<div class="portfolio-pic food_pictures" data-image="/uploads/default-food.png">
+				            <% end %>
+								<div class="portfolio-content">
+									<span class="label label-primary"><%= food.store.name %></span>
+									<div class="portfolio-title food-name" title="<%= food.name %>"><%= food.name %></div>
+									<div class="label label-danger"><%= food.price %> 円</div>
+									<div class="label label-success"><%= food.reviews.count %>
+									レビュー</div>
+									<% if food.reviews.count != 0 %>
+	                                <input class="point-aven"  value="<%= food.reviews.sum(:point)/(food.reviews.count*1.0) %>" class="rating-loading">
+	                                <% else %>
+	                                    <input class="point-aven"  value="0" class="rating-loading">
+	                                <% end %>
+								</div>
+							</div>
+						<% end %>
+						</div>
+	                <% end %>
+				</div>
+				<% end %>
 			</div>
 		</div>
 	</div>

@@ -62,8 +62,8 @@ $shadowColor: #bbbbbb;
         border-radius: 5px;
         box-shadow: 0 10px 10px 2px $shadowColor;
         .overview{
-            padding: 60px 30px;
-            font-size: 1.3em;
+            padding: 0px 30px;
+            font-size: 2.0em;
             color: #a7a7a7;
             font-family: 'Roboto Slab', serif;
             .introductory{
@@ -80,7 +80,7 @@ $shadowColor: #bbbbbb;
                     float: left;
                     padding: 5px 10px;
                     .caption{
-                        font-size: 0.9em;
+                        font-size: 1.9em;
                     }
                     .fa{
                         font-size: 3.5em;
@@ -141,7 +141,7 @@ $shadowColor: #bbbbbb;
                     font-size: 1.8em;
                 }
                 .caption{
-                    padding: 20px 120px;
+                    padding: 0px 120px;
                 }
             }
             .item{

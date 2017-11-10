@@ -54,7 +54,8 @@ $(document).on('turbolinks:load', function() {
 		$(this).css("background-image", "url("+urlImage+")");
 	});
 	$(".search-box").keyup(function(){
-		$.get($(".users-search").attr("action"), $(".users-search").serialize(), null, "script");
+		$.get($(".foods-search").attr("action"), $(".foods-search").serialize(), null, "");
+		$(".foods-search").val();
 		return false;
 	});
 	$("div.alert").delay(2000).slideUp();
@@ -70,5 +71,13 @@ $(document).on('turbolinks:load', function() {
 	});
 	$('.edit-food').on('click', function(e) {
 		e.preventDefault();
+	});
+	$('.point-sort-btn').on('click', function() {
+		$('.point-sort').removeClass('hidden');
+		$('.time-sort').addClass('hidden');
+	});
+	$('.time-sort-btn').on('click', function() {
+		$('.point-sort').addClass('hidden');
+		$('.time-sort').removeClass('hidden');
 	});
 });

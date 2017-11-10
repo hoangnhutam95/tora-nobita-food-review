@@ -5,4 +5,7 @@ class Food < ApplicationRecord
     belongs_to :store
     has_many :reviews, dependent: :destroy
 
+    def self.search name
+        Food.where("name like ?", "%#{name}%")
+    end
 end
