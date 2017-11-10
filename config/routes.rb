@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get '/my_store', to: 'stores#my_store'
     post '/update_store', to: 'stores#update_store'
     get '/create_food', to: 'foods#new'
+    get '/search', to: 'static_pages#search'
 
     resources :users
     resources :account_activations, only: [:edit]
