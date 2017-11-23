@@ -26,6 +26,12 @@ class FoodsController < ApplicationController
 
     def show
         @food = Food.find_by(id: params[:id])
+        @rate_five = Review.where(food_id: @food.id).where(point: 5).count();
+        @rate_four = Review.where(food_id: @food.id).where(point: 4).count();
+        @rate_three = Review.where(food_id: @food.id).where(point: 3).count();
+        @rate_two = Review.where(food_id: @food.id).where(point: 2).count();
+        @rate_one = Review.where(food_id: @food.id).where(point: 1).count();
+        @rate_zero = Review.where(food_id: @food.id).where(point: 0).count();
         if @food == nil
             not_found
         end
@@ -60,10 +66,10 @@ class FoodsController < ApplicationController
 
     def destroy
         @food = Food.find(params[:id]).destroy
-        flash[:success] = "Food deleted"
+        flash[:success] = "食べ物が削除されました。"
 
         if @food.destroy
-            redirect_to root_path
+            redirect_to :back
         end
     end
 

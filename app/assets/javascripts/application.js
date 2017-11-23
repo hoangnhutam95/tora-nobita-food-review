@@ -65,13 +65,21 @@ $(document).on('turbolinks:load', function() {
     });
     $('#myCarousel').carousel();
     $('#rating-review').rating({'min' : '0', 'max' : '5', 'step' : '1', 'size' : 'xs'});
-    $('#point-ave').rating({displayOnly: true, step: 0.5});
+    $('#point-ave').rating({displayOnly: true, step: 0.5, size: 'xs'});
     $(".point-aven").each(function() {
 		$(this).rating({displayOnly: true, step: 0.5, size: 'xs'});
 	});
 	$('.edit-food').on('click', function(e) {
 		e.preventDefault();
 	});
+	$('.delete-food').on('click', function(e) {
+		e.preventDefault();
+	});
+
+	$('.delete-review').on('click', function(e) {
+		return confirm("このレビューを削除しますか？");
+	});
+
 	$('.point-sort-btn').on('click', function() {
 		$('.point-sort').removeClass('hidden');
 		$('.time-sort').addClass('hidden');
@@ -79,5 +87,8 @@ $(document).on('turbolinks:load', function() {
 	$('.time-sort-btn').on('click', function() {
 		$('.point-sort').addClass('hidden');
 		$('.time-sort').removeClass('hidden');
+	});
+	$('.edit-rating-review').each(function() {
+		$(this).rating({'min' : '0', 'max' : '5', 'step' : '1', 'size' : 'xs'});
 	});
 });
