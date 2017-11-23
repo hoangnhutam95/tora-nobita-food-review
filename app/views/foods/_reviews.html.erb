@@ -4,13 +4,15 @@
         <div class="well padding5 owner-clear">
             <div class="media">
                 <% if logged_in? && current_user.id == review.user.id%>
+
                     <div class="setting-s">
                         <div class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <b class="glyphicon glyphicon-remove"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><%= link_to "デリート", review_path(id: review.id), method: :delete %></li>
+                                <li><a class="edit-review" key="<%= review.id %>" data-toggle="modal" data-target="#editReviewModal<%= review.id %>">エディット</a></li>
+                                <li><%= link_to "デリート", review_path(id: review.id), method: :delete, class: "delete-review" %></li>
                             </ul>
                         </div>
                     </div>

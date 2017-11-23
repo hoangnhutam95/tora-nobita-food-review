@@ -63,6 +63,24 @@
             </div>
         </div>
     </div>
+    <div id="delete-food" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title center text-success">食べ物を削除する？</h4>
+                </div>
+                <div class="modal-body">
+                    fsdfsdfsd
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="content">
         <div class="container present">
             <div class="portfolio" id="portfolio-path">
@@ -97,13 +115,30 @@
                                         <% end %>
                                         <% if logged_in? && current_user.id == @store.user.id %>
                                             <div class="edit-food label label-success" data-toggle="modal" data-target="#editModal<%= food.id %>">エディット</div>
-                                            <div class="delete-food label label-danger">デリート</div>
+                                            <div class="delete-food label label-danger" data-toggle="modal" data-target="#delete-food<%= food.id %>">デリート</div>
                                         <% end %>
                                     </div>
                                 </div>
                             <% end %>
                             </div>
                             <% if logged_in? && current_user.id == @store.user.id %>
+                                <div id="delete-food<%= food.id %>" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title center text-success">食べ物を削除する？</h4>
+                                                    <%= link_to "確認する", food_path(id: food.id), method: :delete, class: 'btn btn-success', remote: true %>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div id="editModal<%= food.id %>" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
 

@@ -16,6 +16,16 @@ class ReviewsController < ApplicationController
         end
     end
 
+    def update
+        @review = Review.find(params[:id])
+        if @review.update_attributes(review_params)
+            flash[:success] = "レビュー更新"
+            redirect_to :back
+        else
+            redirect_to :back
+        end
+    end
+
     def destroy
         @review = Review.find(params[:id]).destroy
 

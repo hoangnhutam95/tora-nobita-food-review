@@ -1,6 +1,31 @@
 <% @reviews = food.reviews %>
 <% if (@reviews.length > 0) %>
     <% @reviews.reverse.each do |review| %>
+        <div id="editReviewModal<%= review.id %>" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+            <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title center text-success">レビューを編集する</h4>
+                    </div>
+                    <div class="modal-body">
+                        <%= form_for(review) do |f| %>
+                                    <div class="form-group">
+                                        <%= f.hidden_field :point, class: 'edit-rating-review' %>
+                                        <%= f.text_area(:content, size: "50x5", :required => true, placeholder: "あなたのレビューを入力してください...", class: 'form-control bg-info b-r-0' ) %>
+                                    </div>
+
+                                <% if logged_in? && current_user%>
+                                    <%= f.submit " エディット-->", class: "btn-success btn" %>
+                                <% end %>
+                        <% end %>
+                    </div>
+                </div>
+
+            </div>
+        </div>
         <%= render 'foods/reviews', food: food, review: review %>
     <% end %>
 <% end %>

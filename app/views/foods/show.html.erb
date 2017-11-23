@@ -67,11 +67,166 @@
                         <h4 class="">レストラン: <span class="lead text-primary"><%= link_to @food.store.name, @food.store %></span></h4>
                         <h4 class="">説明: </h4>
                         <h5 class="lead text-primary"><%= @food.description %></h5>
-                        <% if @food.reviews.count != 0 %>
-                        <input id="point-ave" name="input-3" value="<%= @food.reviews.sum(:point)/(@food.reviews.count*1.0) %>" class="rating-loading">
-                        <% else %>
-                            <input class="point-aven"  value="0" class="rating-loading">
-                        <% end %>
+                        <div class="">
+                            <% if @food.reviews.count != 0 %>
+                            <input id="point-ave" name="input-3" value="<%= @food.reviews.sum(:point)/(@food.reviews.count*1.0) %>" class="rating-loading">
+                            <div class="rate-avar"><%= (@food.reviews.sum(:point)*1.0/(@food.reviews.count)).round(2) %>
+                                <span class="number-people"><%= @food.reviews.count %>人投票された</span>
+                            </div>
+
+                            <% else %>
+                                <input class="point-aven"  value="0" class="rating-loading"><div class="rate-avar">0.00</div>
+                                <span class="number-people">0人投票された</span>
+                            <% end %>
+                        </div>
+
+                        <div id="rate-show-hotel">
+                            <div id="rate-detail-hotel">
+                                <ul>
+                                    <% if @food.reviews.count != 0 %>
+                                        <li>
+                                            <span class="margin-right5"> 5 </span>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+
+                                            <% if @rate_five == 0 %>
+                                                <div class="bar bar-5";>
+                                                    <p>0</p>
+                                                </div>
+                                              <% else %>
+                                                <div class="bar bar-5" style="width: <%= @rate_five/(@food.reviews.count*1.0)*80 %>%;">
+                                                  <p><%= @rate_five %></p>
+                                                </div>
+                                              <% end %>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li>
+                                            <span class="margin-right5"> 4 </span>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+
+                                            <% if @rate_four == 0 %>
+                                                <div class="bar bar-4";>
+                                                    <p>0</p>
+                                                </div>
+                                              <% else %>
+                                                <div class="bar bar-4" style="width: <%= @rate_four/(@food.reviews.count*1.0)*80 %>%;">
+                                                  <p><%= @rate_four %></p>
+                                                </div>
+                                              <% end %>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li>
+                                            <span class="margin-right5"> 3 </span>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+
+                                            <% if @rate_three ==0 %>
+                                                <div class="bar bar-3";>
+                                                    <p>0</p>
+                                                </div>
+                                              <% else %>
+                                                <div class="bar bar-3" style="width: <%= @rate_three/(@food.reviews.count*1.0)*80 %>%;">
+                                                  <p><%= @rate_three %></p>
+                                                </div>
+                                              <% end %>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li>
+                                            <span class="margin-right5"> 2 </span>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+
+                                            <% if @rate_two ==0 %>
+                                                <div class="bar bar-2";>
+                                                    <p>0</p>
+                                                </div>
+                                              <% else %>
+                                                <div class="bar bar-2" style="width: <%= @rate_two/(@food.reviews.count*1.0)*80 %>%;">
+                                                  <p><%= @rate_two %></p>
+                                                </div>
+                                              <% end %>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li>
+                                            <span class="margin-right5"> 1 </span>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+
+                                            <% if @rate_one ==0 %>
+                                                <div class="bar bar-1";>
+                                                    <p>0</p>
+                                                </div>
+                                              <% else %>
+                                                <div class="bar bar-1" style="width: <%= @rate_one/(@food.reviews.count*1.0)*80 %>%;">
+                                                  <p><%= @rate_one %></p>
+                                                </div>
+                                              <% end %>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li>
+                                            <span class="margin-right5"> 0 </span>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+
+                                            <% if @rate_zero == 0 %>
+                                                <div class="bar bar-0">
+                                                    <p>0</p>
+                                                </div>
+                                              <% else %>
+                                                <div class="bar bar-0" style="width: <%= @rate_zero/(@food.reviews.count*1.0)*80 %>%;">
+                                                  <p><%= @rate_zero %></p>
+                                                </div>
+                                              <% end %>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                    <% else %>
+                                        <li>
+                                            <span class="margin-right5"> 5 </span>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <div class="bar bar-5">
+                                                <p>0</p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li>
+                                            <span class="margin-right5"> 4 </span>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <div class="bar bar-4">
+                                                <p>0</p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li>
+                                            <span class="margin-right5"> 3 </span>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <div class="bar bar-3">
+                                                <p>0</p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li>
+                                            <span class="margin-right5"> 2 </span>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <div class="bar bar-2">
+                                                <p>0</p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li>
+                                            <span class="margin-right5"> 1 </span>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <div class="bar bar-1">
+                                                <p>0</p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li>
+                                            <span class="margin-right5"> 0 </span>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <div class="bar bar-0">
+                                                <p>0</p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                    <% end %>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,3 +247,10 @@
     </div>
 </section>
 
+<script type="text/javascript">
+    $('.edit-review').each(function (e) {
+        $(this).on('click', function () {
+            key = $(this).attr('key');
+        });
+    });
+</script>
