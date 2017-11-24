@@ -19,7 +19,6 @@
 
 # Ignore Byebug command history file.
 .byebug_history
-config/database.yml
 log/development.log
 /public/uploads
-/vendor/assets/bower_components
+vendor/assets/bower_components/
