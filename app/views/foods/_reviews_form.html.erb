@@ -15,7 +15,7 @@
         <% if logged_in? && current_user%>
             <%= f.hidden_field :user_id, :value => current_user.id %>
             <%= f.hidden_field :food_id, :value => food.id %>
-            <%= f.submit " レビュー -->", class: "btn-success btn" %>
+            <%= f.submit " レビュー ", class: "btn-success btn" %>
             <% end %>
         </div>
     </div>
