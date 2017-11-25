@@ -3,7 +3,7 @@
 	  <div class="panel-heading">
 	  	<%=receiver.name%>
 	  </div>
-	  <div class="panel-body">
+	  <div class="panel-body" id="content">
 	  	<% conversation.messages.each do |mess|%>
 	  		<%if mess.user==sender%>
 	  			<div style="border: solid blue"><%=simple_format(mess.body)%></div>

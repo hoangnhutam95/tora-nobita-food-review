@@ -3,10 +3,8 @@ class MessagesController < ApplicationController
 	def create
 		@message=Message.new(message_params)
 		if @message.save
-			
-		else
-			flash[:danger]="Failed"
-			puts @message.errors.full_messages
+			ChatJob.perform_later(@message)
+		else			
 		end
 	end
 	private
