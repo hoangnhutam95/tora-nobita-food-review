@@ -1,5 +1,5 @@
 <% if !@message.errors.any? %>
-	console.log("Sender: <%=@message.user.name%> Content: <%=@message.body%>")
+	$("#conversation_<%=@message.conversation_id%> .panel-footer form textarea").val('')
 <% else %>
 	console.log(@message.errors.full_messages)
 <% end %>
