@@ -1,0 +1,3 @@
+<% if !@message.errors.any? %>
+	console.log("Sender: <%=@message.user.name%> Content: <%=@message.body%>")
+<% end %>

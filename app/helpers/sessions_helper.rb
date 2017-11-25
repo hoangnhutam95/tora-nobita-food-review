@@ -4,7 +4,7 @@ module SessionsHelper
 	def log_in user
 		session[:user_id] = user.id		
 		cookies.signed["user.id"] = user.id
-  	cookies.signed["user.expires_at"] = 30.minutes.from_now
+  	cookies.signed["user.expires_at"] = 1.year.from_now
 		# create a temporary cookie with encrypted id
 	end
 
