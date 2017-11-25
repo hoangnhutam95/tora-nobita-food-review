@@ -1,5 +1,8 @@
 #conversations {	
-	position: absolute;
+	position: fixed;
+	z-index: 1;
+	right: 20px;
+	bottom: 0%;
 }
 .panel {
 	padding-right: 0;

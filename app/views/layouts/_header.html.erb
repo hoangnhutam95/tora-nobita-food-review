@@ -18,9 +18,16 @@
 						<%= current_user.name %>
 						<b class="caret"></b>
 					</a>
-					<ul class="dropdown-menu pull-right">
+					<ul class="dropdown-menu pull-right" style="width: 130px;">
 						<li><%= link_to "プロフィール", edit_user_path(current_user) %></li>
 						<li><%= link_to "ログアウト", logout_path, method: "delete" %></li>
+					</ul>
+				</li>
+				<li class="dropdown" id="notifications">
+					<a href="#" class="dropdown" data-toggle="dropdown">
+						<div style="color: red;font-weight: bold">0</div>						
+					</a>
+					<ul class="dropdown-menu pull-right" style="width: 200px;">	
 					</ul>
 				</li>
 			<% else %>
