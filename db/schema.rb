@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011125515) do
+ActiveRecord::Schema.define(version: 20171125022637) do
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "user1_id"
+    t.integer  "user2_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user1_id"], name: "index_conversations_on_user1_id"
+    t.index ["user2_id"], name: "index_conversations_on_user2_id"
+  end
 
   create_table "food_pictures", force: :cascade do |t|
     t.integer  "food_id",    null: false
@@ -28,6 +37,16 @@ ActiveRecord::Schema.define(version: 20171011125515) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["store_id"], name: "index_foods_on_store_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "conversation_id"
+    t.string   "body"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
