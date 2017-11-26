@@ -2,13 +2,14 @@
 	position: fixed;
 	z-index: 1;
 	right: 20px;
-	bottom: 0%;
+	bottom: 0%;	
 }
 .panel {
 	padding-right: 0;
 	padding-left: 0;
 	width: 300px;
-	margin-left: 15px;		
+	margin-left: 15px;
+	display: inline-block;		
 }
 #content {	
   height: 300px;
