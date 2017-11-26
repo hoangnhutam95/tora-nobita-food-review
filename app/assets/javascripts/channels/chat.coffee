@@ -24,5 +24,6 @@ App.chat = App.cable.subscriptions.create "ChatChannel",
 	    		conv_id=$("li#notifications ul li#"+data.conversation)
 	    		if conv_id.length>0
 	    		else
-	    			tmp.text(parseInt(tmp.text())+1)
-	    			$("li#notifications ul").append("<li id='"+data.conversation+"'><a>"+"hehe"+"</a></li>")
+	    			if data.who=="receiver"
+	    				tmp.text(parseInt(tmp.text())+1)
+	    				$("li#notifications ul").append("<li id='"+data.conversation+"'><a>"+data.sendername+"</a></li>")

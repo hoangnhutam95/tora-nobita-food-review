@@ -13,5 +13,6 @@
 			<%= content_tag(:div, sanitize(message), class: "alert alert-#{message_type}") %>
 		<% end %>
 		<%= yield %>
+		<div id="conversations" class="row"></div>
 	</body>
 </html>
