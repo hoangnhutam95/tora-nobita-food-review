@@ -1,1 +1,11 @@
-$('.review_list').html("<%= j render(partial: 'foods/reviews', locals: { reivew: @review }) %>")
+help_block=$('ul#review-error')
+<% if @review.errors.any? %>
+	help_block.empty()
+	<%@review.errors.full_messages.each do |mess| %>
+		help_block.append("<li><%=mess%></li>")
+	<% end %>
+<% else %>	
+	help_block.empty()
+	location.reload()
+	// $('.reviews_list').append("<%= j render(partial: 'foods/reviews', locals: { review: @review }) %>")
+<% end %>
