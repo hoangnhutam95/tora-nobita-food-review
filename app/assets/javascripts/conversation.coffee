@@ -30,12 +30,19 @@ $(document).on "turbolinks:load", ()->
 						$("#conversations #content").scrollTop($("#conversations #content")[0].scrollHeight)
 					$("#conversations .panel-heading .close").click ()->
 						$(this).closest(".panel").remove()
-					tmp=$("li#notifications a div")
+					tmp=$("li#notifications a.dropdown")
 					if tmp.length>0
 						conv_li=$("li#notifications ul li#"+conv_id)
-						if conv_li.length>0							
-							tmp.text(parseInt(tmp.text())-1)
-					conv_li.remove()
+						if conv_li.length>0
+							conv_li.remove()
+							number_notification=parseInt(tmp.text())-1
+							if number_notification>0							
+								tmp.text(number_notification)
+							else
+								tmp.text('')
+								$("li#notifications").removeClass("has_new_messages")							
 				failure: (error)->
 					console.log(error)
 				dataType: 'html'
+	if $("li#notifications ul li").length>0
+		$("li#notifications").addClass("has_new_messages")

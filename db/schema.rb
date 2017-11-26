@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171125022637) do
+ActiveRecord::Schema.define(version: 20171126033250) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer  "user1_id"
     t.integer  "user2_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "not_see_user_id"
+    t.index ["not_see_user_id"], name: "index_conversations_on_not_see_user_id"
     t.index ["user1_id"], name: "index_conversations_on_user1_id"
     t.index ["user2_id"], name: "index_conversations_on_user2_id"
   end

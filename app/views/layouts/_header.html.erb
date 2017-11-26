@@ -24,10 +24,14 @@
 					</ul>
 				</li>
 				<li class="dropdown" id="notifications">
+					<% conversations=current_user.conversations.where(not_see_user_id: current_user.id)%>
 					<a href="#" class="dropdown" data-toggle="dropdown">
-						<div style="color: red;font-weight: bold">0</div>						
+						<%=conversations.size==0 ? nil : conversations.size%>												
 					</a>
-					<ul class="dropdown-menu pull-right" style="width: 200px;">	
+					<ul class="dropdown-menu pull-right" style="width: 200px;">
+						<% conversations.each do |conv|%>
+							<li id="<%=conv.id%>"><a><%= current_user.id==conv.user1_id ? conv.user2.try(:name) : conv.user1.try(:name) %></a></li>
+						<% end %>	
 					</ul>
 				</li>
 			<% else %>

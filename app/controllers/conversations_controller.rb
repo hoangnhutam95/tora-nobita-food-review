@@ -10,6 +10,7 @@ class ConversationsController < ApplicationController
 					unless @conversation
 						@conversation=Conversation.create(user1_id: current_user.id,user2_id: user2_id)
 					end
+					@conversation.update(not_see_user_id: nil)
 					@sender=current_user
 					@receiver= (@sender==@conversation.user1 ? @conversation.user2 : @conversation.user1)
 					render layout: false
@@ -19,6 +20,7 @@ class ConversationsController < ApplicationController
 					unless @conversation
 						@conversation=Conversation.create(user1_id: current_user.id,user2_id: user1_id)
 					end
+					@conversation.update(not_see_user_id: nil)
 					@sender=current_user
 					@receiver= (@sender==@conversation.user1 ? @conversation.user2 : @conversation.user1)
 					render layout: false
@@ -36,6 +38,7 @@ class ConversationsController < ApplicationController
 			@conversation=Conversation.find_by_id(user1_id)
 			if @conversation
 				puts "===================4"
+				@conversation.update(not_see_user_id: nil)
 				@sender=current_user
 				@receiver= (@sender==@conversation.user1 ? @conversation.user2 : @conversation.user1)
 				render layout: false
@@ -44,6 +47,10 @@ class ConversationsController < ApplicationController
 				flash[:danger]="Conversation not found"
 				redirect_to root_path
 			end
+		end
+		def update
+			conversation=Conversation.find_by_id(params[:id])	
+			conversation.update(not_see_user_id: nil) if conversation	
 		end				
 	end	
 	private
