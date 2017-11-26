@@ -1,5 +1,5 @@
-<% provide(:title, 'Reset password') %>
-<h1 class="center text-success">Reset password for account: </h1>
+<% provide(:title, 'パスワードを再設定する') %>
+<h1 class="center text-success">アカウント: </h1>
 <h1 class="center text-primary"><%= @user.email %></h1>
 
 <div class="row edit-profile">
@@ -10,15 +10,15 @@
       <% if @user.errors[:password].length != 0%>
         <div class="error-messages text-danger"><%= @user.errors[:password][0] %></div>
       <% end %>
-      <%= f.label :password %>
+      <%= f.label :password ,"パスワード"%>
       <%= f.password_field :password, class: "form-control" %>
       <% if @user.errors[:password_confirmation].length != 0%>
         <div class="error-messages text-danger"><%= @user.errors[:password_confirmation][0] %></div>
       <% end %>
-      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.label :password_confirmation, "確認" %>
       <%= f.password_field :password_confirmation, class: "form-control" %>
 
-      <%= f.submit "Update password", class: "btn btn-primary" %>
+      <%= f.submit "パスワードの更新", class: "btn btn-primary" %>
     <% end %>
 
   </div>

@@ -2,7 +2,7 @@
     <td><%= link_to store.name, store %></td>
     <td><%= store.address %></td>
     <td><%= store.foods.count %></td>
-    <td><div class="btn btn-success edit-store" data-name="<%= store.name %>" data-address="<%= store.address %>" data-id="<%= store.id %>" data-toggle="modal" data-target="#myModal">Edit</td>
+    <td><div class="btn btn-warning edit-store" data-name="<%= store.name %>" data-address="<%= store.address %>" data-id="<%= store.id %>" data-toggle="modal" data-target="#myModal">編集</td>
     <td>
         <div class="setting">
             <div class="dropdown">
@@ -10,7 +10,7 @@
                     <b class="glyphicon glyphicon-remove"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><%= link_to "Delete store", store_path(id: store.id), method: :delete, remote: true %></li>
+                    <li><%= link_to "ストアー削除?", store_path(id: store.id), method: :delete, remote: true %></li>
                 </ul>
             </div>
         </div>

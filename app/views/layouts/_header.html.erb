@@ -2,12 +2,12 @@
 	<div class="nav-wrapper">
 		<a href="/" class="brand-logo"><%= fa_icon "coffee" %> | ベトナムの料理</a>
 		<%= form_tag search_path, method: "get", class: "foods-search form-group " do %>
-			<%= text_field_tag :search, params[:search], class: "search-box search-form form-control", placeholder: "サーチ..." %>
+			<%= text_field_tag :search, params[:search], class: "search-box search-form form-control", placeholder: "検索..." %>
 		<% end %>
 		<ul id="nav-mobile" class="right hide-on-med-and-down">
 			<% if logged_in? %>
                 <li><%= link_to "私の店", my_store_path %></li>
-                <li><a href="#portfolio-path" onclick="internal_link_click(this)">フード</a></li>
+                <li><a href="#portfolio-path" onclick="internal_link_click(this)">料理</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown" data-toggle="dropdown">
 						<% if current_user.avatar? %>
@@ -35,8 +35,8 @@
 					</ul>
 				</li>
 			<% else %>
-					<li><a href="#portfolio-path" onclick="internal_link_click(this)">Food</a></li>
-					<li><a href="/login">Sign In</a></li>
+					<li><a href="#portfolio-path" onclick="internal_link_click(this)">料理</a></li>
+					<li><a href="/login">サインイン</a></li>
 			<% end %>
 		</ul>
 	</div>

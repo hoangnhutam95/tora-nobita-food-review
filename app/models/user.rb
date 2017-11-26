@@ -81,7 +81,7 @@ class User < ApplicationRecord
     private
         def avatar_size
             if avatar.size > 5.megabytes
-                error.add(:avatar, "should be less than 5MB")
+                error.add(:avatar, "5MB未満にする必要があります")
             end
         end
 

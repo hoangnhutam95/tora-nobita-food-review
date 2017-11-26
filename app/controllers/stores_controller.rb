@@ -15,7 +15,7 @@ class StoresController < ApplicationController
     def create
         @store = Store.new(store_params)
         if @store.save
-            flash[:info] = "Create success"
+            flash[:info] = "作成しました"
             redirect_to :back
         else
             flash[:danger] = @store.errors.full_messages.join(" & ")
@@ -33,7 +33,7 @@ class StoresController < ApplicationController
     def update_store
         @store = Store.find(store_params[:id])
         if @store.update_attributes(store_params)
-            flash[:success] = "Store updated"
+            flash[:success] = "更新しました"
             redirect_to :back
         else
             render 'edit'
@@ -42,7 +42,7 @@ class StoresController < ApplicationController
 
     def destroy
         @store = Store.find(params[:id]).destroy
-        flash[:success] = "Store deleted"
+        flash[:success] = "削除しました"
 
         if @store.destroy
             redirect_to my_store_path
