@@ -4,7 +4,7 @@
     <br><br>
     <% if logged_in? && current_user.id == @store.user.id %>
         <div class="pull-right">
-            <button type="button" class="waves-effect waves-light btn" data-toggle="modal" data-target="#myModal">食物を加える</button>
+            <button type="button" class="waves-effect waves-light btn" data-toggle="modal" data-target="#myModal">食物を追加</button>
         </div>
     <% end %>
 <!-- Modal -->
@@ -15,7 +15,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title center text-success">食物を加える</h4>
+                        <h4 class="modal-title center text-success">食物を追加</h4>
                 </div>
                 <div class="modal-body">
                     <%= form_for(:food, url: foods_path) do |f| %>
@@ -58,7 +58,7 @@
                     <% end %>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@
                     fsdfsdfsd
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
                 </div>
             </div>
         </div>
@@ -114,8 +114,8 @@
                                             <input class="point-aven"  value="0" class="rating-loading">
                                         <% end %>
                                         <% if logged_in? && current_user.id == @store.user.id %>
-                                            <div class="edit-food label label-success" data-toggle="modal" data-target="#editModal<%= food.id %>">エディット</div>
-                                            <div class="delete-food label label-danger" data-toggle="modal" data-target="#delete-food<%= food.id %>">デリート</div>
+                                            <div class="edit-food label label-success" data-toggle="modal" data-target="#editModal<%= food.id %>">編集</div>
+                                            <div class="delete-food label label-danger" data-toggle="modal" data-target="#delete-food<%= food.id %>">削除</div>
                                         <% end %>
                                     </div>
                                 </div>
@@ -130,11 +130,11 @@
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                     <h4 class="modal-title center text-success">食べ物を削除する？</h4>
-                                                    <%= link_to "確認する", food_path(id: food.id), method: :delete, class: 'btn btn-success', remote: true %>
+                                                    <%= link_to "確認する", food_path(id: food.id), method: :delete, class: 'btn btn-danger', remote: true %>
                                             </div>
 
                                             <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
                                             </div>
                                         </div>
                                     </div>
@@ -319,11 +319,11 @@
                                                         </div>
                                                     <% end %>
                                                     </br>
-                                                    <%= f.submit "エディット !", class: "btn-success btn" %>
+                                                    <%= f.submit "更新", class: "btn-warning btn" %>
                                                 <% end %>
                                             </div>
                                             <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
                                             </div>
                                         </div>
                                     </div>

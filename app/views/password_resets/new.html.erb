@@ -1,13 +1,13 @@
-<% provide(:title, "Forgot password") %>
-<h1 class="center text-success">Forgot password</h1>
+<% provide(:title, "パスワードをお忘れですか") %>
+<h1 class="center text-success">パスワードをお忘れです</h1>
 
 <div class="row edit-profile">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(:password_reset, url: password_resets_path) do |f| %>
-      <%= f.label :email %>
+      <%= f.label "メール" %>
       <%= f.email_field :email, class: 'form-control' %>
 
-      <%= f.submit "Submit", class: "btn btn-primary" %>
+      <%= f.submit "提出する", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>

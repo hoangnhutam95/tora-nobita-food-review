@@ -2,7 +2,9 @@ module SessionsHelper
 
 	# Logs in the given user
 	def log_in user
-		session[:user_id] = user.id
+		session[:user_id] = user.id		
+		cookies.signed["user.id"] = user.id
+  	cookies.signed["user.expires_at"] = 1.year.from_now
 		# create a temporary cookie with encrypted id
 	end
 
@@ -40,12 +42,14 @@ module SessionsHelper
 	def forget user
 		user.forget
 		cookies.delete(:user_id)
-		cookies.delete(:remember_token)
+		cookies.delete(:remember_token)		
 	end
 
 	# Logs out the current user.
 	def log_out
 		forget(current_user)
+		cookies.delete("user.id")
+		cookies.delete("user.expires_at")		
 		session.delete(:user_id)
 		@current_user = nil
 	end

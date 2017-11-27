@@ -1,10 +1,10 @@
-<h1>Food...</h1>
+<h1>ベトナム料理</h1>
 
-<p>Hi <%= @user.name %>,</p>
+<p><%= @user.name %>、こんにちは</p>
 
 <p>
-Welcome to the Food! Click on the link below to activate your account:
+食べ物へようこそ！ 下のリンクをクリックしてアカウントを有効にしてください
 </p>
 
-<%= link_to "Activate", edit_account_activation_url(@user.activation_token,
+<%= link_to "アクティブ", edit_account_activation_url(@user.activation_token,
                                                     email: @user.email) %>

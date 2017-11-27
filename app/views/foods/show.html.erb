@@ -65,6 +65,9 @@
                         <p class="lead text-primary"><%= @food.name %></p>
                         <h4 class="tip-left">価格: <span class="price"><%= @food.price %>円</span></h4>
                         <h4 class="">レストラン: <span class="lead text-primary"><%= link_to @food.store.name, @food.store %></span></h4>
+                        <% if logged_in? && current_user!=@food.user %>
+                            <button id="lienlac" link="/conversations/<%=current_user.id%>,<%=@food.user.id%>" class="btn btn-success">連絡</button>
+                        <% end %>
                         <h4 class="">説明: </h4>
                         <h5 class="lead text-primary"><%= @food.description %></h5>
                         <div class="">
@@ -159,7 +162,7 @@
                                               <% end %>
                                             <div class="clearfix"></div>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <span class="margin-right5"> 0 </span>
                                             <i class="fa fa-star" aria-hidden="true"></i>
 
@@ -173,7 +176,7 @@
                                                 </div>
                                               <% end %>
                                             <div class="clearfix"></div>
-                                        </li>
+                                        </li> -->
                                     <% else %>
                                         <li>
                                             <span class="margin-right5"> 5 </span>
@@ -215,14 +218,14 @@
                                             </div>
                                             <div class="clearfix"></div>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <span class="margin-right5"> 0 </span>
                                             <i class="fa fa-star" aria-hidden="true"></i>
                                             <div class="bar bar-0">
                                                 <p>0</p>
                                             </div>
                                             <div class="clearfix"></div>
-                                        </li>
+                                        </li> -->
                                     <% end %>
                                 </ul>
                             </div>
@@ -246,7 +249,6 @@
         </div>
     </div>
 </section>
-
 <script type="text/javascript">
     $('.edit-review').each(function (e) {
         $(this).on('click', function () {

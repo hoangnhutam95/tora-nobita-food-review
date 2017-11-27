@@ -1,0 +1,63 @@
+#conversations {	
+	position: fixed;
+	z-index: 9;
+	right: 20px;
+	bottom: 0%;	
+}
+.panel {
+	padding-right: 0;
+	padding-left: 0;
+	width: 300px;
+	margin-left: 15px;
+	display: inline-block;		
+}
+#content {	
+  height: 300px;
+  overflow-y: scroll;
+}
+.sender_body {
+	color: white;	
+	margin-bottom: 5px;
+	p {
+		background-color: #ff3399;
+		border-radius: 5px;
+		display: inline-block;
+		padding: 3px;
+	}	
+	
+	text-align: right;
+	
+	}
+.reciever_body {
+	color: black;
+	border-radius: 5px;
+	margin-bottom: 5px;
+	p {
+		background-color: #33ffff;
+		border-radius: 5px;
+		display: inline-block;
+		padding: 3px;
+	}			
+	
+	text-align: left;
+	
+	}
+.panel-footer{
+	form{
+		height: 50px;
+		input{
+			margin-bottom: 40px;
+		}
+		textarea{
+			width: 220px;
+			height: 50px;
+			resize: none;
+		}
+	}	
+}
+.has_new_messages {
+	background-color: red;
+	font-weight: bold;
+	font-size: 20px;
+	color: white;
+}

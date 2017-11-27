@@ -12,8 +12,8 @@ class User < ApplicationRecord
     validates :password, presence: true, length: {minimum: 8}, allow_nil: true
     validate :avatar_size
     has_many :stores, dependent: :destroy
-    has_many :reviews, dependent: :destroy
-
+    has_many :reviews, dependent: :destroy    
+    has_many :conversations, ->(user) { unscope(:where).where("user1_id = :id OR user2_id = :id", id: user.id) }
     # Returns the hash digest of the given string.
     def self.digest string
         cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -81,7 +81,7 @@ class User < ApplicationRecord
     private
         def avatar_size
             if avatar.size > 5.megabytes
-                error.add(:avatar, "should be less than 5MB")
+                error.add(:avatar, "5MB未満にする必要があります")
             end
         end
 

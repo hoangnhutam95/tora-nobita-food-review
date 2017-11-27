@@ -9,7 +9,7 @@ class FoodPicture < ApplicationRecord
         # Validates the size of an uploaded image
         def picture_size
             if picture.size > 1.megabytes
-                errors.add(:picture, "should be less than 1MB")
+                errors.add(:picture, "1MB未満にする必要があります")
             end
         end
 

@@ -1,0 +1,29 @@
+<div class="panel panel-primary" id="conversation_<%=conversation.id%>">
+	<div class="panel-heading">
+	 	<% if receiver.avatar? %>
+			<%= image_tag receiver.avatar.url,size: "20x20"%>
+		<% else %>
+			<%= image_tag receiver.avatar.default_url("avatar_default.jpg"),size: "20x20"%>
+		<% end %>
+	 	<%=receiver.name%>
+	  <span class="close">&times </span>
+	</div>
+	<div class="panel-body" id="content">
+	  <% conversation.messages.includes(:user).each do |mess|%>
+	  	<%if mess.user==sender%>
+	  		<div class="sender_body"><%=simple_format(mess.body)%></div>
+	  	<%else%>
+	  		<div class="reciever_body"><%=simple_format(mess.body)%></div>
+	  	<%end%>
+	  <% end %>
+	</div>
+	<div class="panel-footer">
+	  <%=form_for Message.new,remote: true do |f|%>	  		
+	  	<%=f.hidden_field :user_id,value: sender.id%>
+	  	<%=f.hidden_field :conversation_id,value: conversation.id%>
+	  	<%=f.text_area :body%>
+	  	<%=f.submit '送',class: "btn btn-success"%>
+	  <%end%>
+	</div>
+</div>
+

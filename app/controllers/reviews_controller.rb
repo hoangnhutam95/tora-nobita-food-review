@@ -5,13 +5,31 @@ class ReviewsController < ApplicationController
     end
 
     def create
-        @food = Food.find_by(id: review_params[:food_id])
-        @reivew = Review.new(review_params)
-        if @reivew.save
-            flash[:success] = "作成されたレビュー。"
-            respond_to do |format|
-                format.html {redirect_to :back}
-                format.js
+        tmp=review_params
+        @food = Food.find_by(id: tmp[:food_id])
+        @review=Review.find_by(user_id: tmp[:user_id],food_id: tmp[:food_id])
+        if @review
+            if (tmp[:point]=tmp[:point].to_i)>0
+                if @review.update(point: tmp[:point],content: tmp[:content])
+                    flash[:success] = "レビューが更新された。"
+                else
+                    flash[:danger] = "レビューが更新されない。"
+                end
+            else
+                if @review.update(content: tmp[:content])
+                    flash[:success] = "レビューが更新された。"
+                else
+                    flash[:danger] = "レビューが更新されない。"
+                end
+            end
+        else
+            
+            tmp[:point]=tmp[:point].to_i
+            @review = Review.new(tmp)
+            if @review.save
+                flash[:success] = "レビューが作成された。"
+            else
+                flash[:danger] = "レビューが作成されない。"               
             end
         end
     end
@@ -19,7 +37,7 @@ class ReviewsController < ApplicationController
     def update
         @review = Review.find(params[:id])
         if @review.update_attributes(review_params)
-            flash[:success] = "レビュー更新"
+            flash[:success] = "レビューが更新された"
             redirect_to :back
         else
             redirect_to :back
@@ -30,7 +48,7 @@ class ReviewsController < ApplicationController
         @review = Review.find(params[:id]).destroy
 
         if @review.destroy
-            flash[:success] = "レビューは削除されました."
+            flash[:success] = "レビューが削除されました."
             redirect_to :back
         end
     end

@@ -1,6 +1,6 @@
 <div id="login-box">
     <div class="left-block">
-        <h1>Sign up</h1>
+        <h1>サインアップ</h1>
         <%= form_for(@user, url: signup_path) do |f| %>
             <% if @user.errors[:name].length != 0 %>
                 <div class="error-messages"><%= @user.errors[:name][0] %></div>
@@ -15,17 +15,17 @@
             <% if @user.errors[:password].length != 0 %>
                 <div class="error-messages"><%= @user.errors[:password][0] %></div>
             <% end %>
-            <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
+            <%= f.password_field :password, placeholder: "パスワード", class: "form-control" %>
 
             <% if @user.errors[:password_confirmation].length != 0 %>
                 <div class="error-messages"><%= @user.errors[:password_confirmation][0] %></div>
             <% end %>
-            <%= f.password_field :password_confirmation, placeholder: "Password Confirmation", class: "form-control" %>
+            <%= f.password_field :password_confirmation, placeholder: "パスワード確認", class: "form-control" %>
             <br>
-            <%= f.submit "Sign up !" %>
+            <%= f.submit "サインアップ" %>
         <% end %>
         <br>
-        <p>Already had account? <%= link_to "Sign In", login_path %></p>
+        <p>すでにアカウントを持っている? <%= link_to "サインイン", login_path %></p>
     </div>
     <div class="right-block">
 
