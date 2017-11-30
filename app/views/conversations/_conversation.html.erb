@@ -6,6 +6,9 @@
 			<%= image_tag receiver.avatar.default_url("avatar_default.jpg"),size: "20x20"%>
 		<% end %>
 	 	<%=receiver.name%>
+	 	<% unless receiver.online? %>
+	 		(オフライン)
+	 	<% end %>
 	  <span class="close">&times </span>
 	</div>
 	<div class="panel-body" id="content">
