@@ -2,7 +2,8 @@ module SessionsHelper
 
 	# Logs in the given user
 	def log_in user
-		session[:user_id] = user.id		
+		session[:user_id] = user.id
+		user.update(online: true)		
 		cookies.signed["user.id"] = user.id
   	cookies.signed["user.expires_at"] = 1.year.from_now
 		# create a temporary cookie with encrypted id
@@ -47,6 +48,7 @@ module SessionsHelper
 
 	# Logs out the current user.
 	def log_out
+		current_user.update(online: false)
 		forget(current_user)
 		cookies.delete("user.id")
 		cookies.delete("user.expires_at")		

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171126033250) do
+ActiveRecord::Schema.define(version: 20171130081004) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer  "user1_id"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20171126033250) do
     t.datetime "activated_at"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
+    t.boolean  "online"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

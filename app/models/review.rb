@@ -5,7 +5,7 @@ class Review < ApplicationRecord
     validates :user_id, presence: true
     validates :food_id, presence: true
     validates :content, length: {maximum: 1000}
-    validates :point,numericality: { only_integer: true, greater_than: 0,less_than: 6 }
+    validates :point,numericality: { only_integer: true, greater_than: 0,less_than: 6, message: "は「1」から「5」までしてください。"}
     private
         def default_point
           self.point ||= 0
